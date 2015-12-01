@@ -14,4 +14,14 @@ require_once 'classes/Statistics.class.php';
 session_start();
 
 
+$loadview = $_GET['loadview'];
 
+$data = [
+	'loadview' => $loadview
+];
+
+$view = new PagePrinter($data);
+
+echo $view->render();
+
+//echo $loadview;
