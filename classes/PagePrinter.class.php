@@ -3,12 +3,8 @@
 require_once 'twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 
-
-// SEND TO INDEX
-echo $twig -> render('index.html', $data);
-
 Class PagePrinter {
-  private $data = array(), $loader, $twig, $target = 'templates/blogg.twig';
+  private $data = array(), $loader, $twig, $target = 'templates/index.twig';
 
   function __construct($data){
     $this->data   = $data;
