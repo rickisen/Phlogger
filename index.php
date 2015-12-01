@@ -13,3 +13,5 @@ require_once 'classes/Statistics.class.php';
 // Start a session 
 session_start();
 
+
+
