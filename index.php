@@ -42,5 +42,3 @@ if (isset($_SESSION['user'])){
   $page = new PagePrinter(['dataBase' => $dataBase ]);
 }
 echo $page->render();
-
-//echo $loadview;
