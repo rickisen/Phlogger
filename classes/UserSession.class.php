@@ -8,8 +8,8 @@ class UserSession {
                 // stripslashes: Returns a string with backslashes stripped off. 
                 // (\' becomes ' and so on.) Double backslashes (\\) 
                 // are made into a single backslash (\).
-		$username = $this->mysqli->stripslashes($username);  
-		$password = $this->mysqli->stripslashes($password);
+		/* $username = $this->mysqli->stripslashes($username); */  
+		/* $password = $this->mysqli->stripslashes($password); */
 
 		$this->username = $this->mysqli->real_escape_string($username);
 		$this->password = $this->mysqli->real_escape_string($password);
@@ -18,21 +18,16 @@ class UserSession {
 	}
 
 	function login() {
-		$query = 'SELECT Username, Password, Rank
-		FROM user';
+		$query = 'SELECT Username, password, Rank FROM user';
 
-		if ($result = $this->mysqli->query($query)) {
-		 	$row = $result->fetch_assoc();
-					
-			while ( $row = $result->fetch_assoc() ) {
-				if ($row['Username'] == $this->username && $row['Password'] == $this->password){
-					$this->rank = $row['Rank'];
-					$this->isLoggedIn = TRUE;
-				} 
-			}	
-		} else {
-			return FALSE;
-		}
+		$result = $this->mysqli->query($query);
+                                
+                while ( $row = $result->fetch_assoc() ) {
+                        if ($row['Username'] == $this->username && $row['password'] == $this->password){
+                                $this->rank = $row['Rank'];
+                                $this->isLoggedIn = TRUE;
+                        } 
+                }	
 	}
 
         function __get($x){
