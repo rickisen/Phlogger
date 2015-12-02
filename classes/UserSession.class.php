@@ -1,25 +1,24 @@
 <?php
 
 class UserSession {
-	private $username, $password, $rank;
+	private $username, $password, $rank, $mysqli;
 
 	function __construct ($username, $password) {
-		$this->username = $username; 
-		$this->password = $password;
+		$this->mysqli = new mysqli('localhost', 'root', '','Phlogger');
+
+		$this->username = $this->mysqli->real_escape_string($username);
+		$this->password = $this->mysqli->real_escape_string($password);
 
 		$this->login();
 	}
 
 	function login() {
-		$mysqli = new mysqli('localhost', 'root', '','Phlogger');
-
 		$query = 'SELECT * 
-					FROM user
-					WHERE user.username = "$username"
-					and user.password = "$password"
-				 ';
+		FROM user 
+		WHERE user.username = '.$this->username.'
+		AND user.password = '.$this->password;
 
-		$result = $mysqli->query($query);
+		$result = $this->mysqli->query($query);
 		$row = $result->fetch_assoc();
 
 		while ( $row = $result->fetch_assoc() ) {
