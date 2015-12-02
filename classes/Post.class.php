@@ -11,15 +11,23 @@ class Post{
     $this->tags       = $tags;
 
     foreach ($comments as $comment)
-      $this->comments[] = new Comment($comment['content'], $comment['signature'], $comment['date']);
+      $this->comments[] = new Comment(
+      $comment['content'],
+      $comment['signature'],
+      $comment['date']
+      );
   }
 
   function __get($name){
     return $this->$name;
   }
 
-  function __isset($name){
-    return isset($this->$name);
+  function __isset($name) {
+    if ( isset ($this->$name) ) {
+      return true; 
+    } else {
+      return false;
+    }
   }
 
 }
