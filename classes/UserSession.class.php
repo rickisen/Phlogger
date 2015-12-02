@@ -27,6 +27,12 @@ class UserSession {
 				$row['Username'], 
 				$row['Password'], 
 				$row['Rank']);
+		}	
+
+		if ( isset ($this->user) ){
+			$IsLoggedIn = true;
+		} else {
+			$IsLoggedIn = false;
 		}
 	}
 }
