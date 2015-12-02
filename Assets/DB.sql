@@ -3,7 +3,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
--- DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `Signature` varchar(50) COLLATE utf8_bin NOT NULL,
   `Content` text COLLATE utf8_bin NOT NULL,
@@ -13,8 +12,13 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post`) REFERENCES `post` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+INSERT INTO `comment` (`Signature`, `Content`, `Date`, `post`) VALUES
+('Anon',  'Anon troll #1',  '2015-12-01 13:24:55',  2),
+('Anon noob', 'aksda',  '2015-12-01 13:25:16',  2),
+('Anon #3', 'torloroorlroorl',  '2015-12-01 13:25:55',  2),
+('hjkl',  'lkjh', '2015-12-01 13:49:46',  4),
+('fsdajgfd',  'hfdsgfdsgfds', '2015-12-01 13:49:54',  5);
 
--- DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Title` varchar(40) COLLATE utf8_bin NOT NULL,
@@ -27,13 +31,11 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- DROP TABLE IF EXISTS `Tag`;
 CREATE TABLE `Tag` (
   `Name` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `Username` varchar(30) COLLATE utf8_bin NOT NULL,
