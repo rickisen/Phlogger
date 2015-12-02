@@ -14,18 +14,23 @@
 	<title>Phlogger</title>
 </head>
 <body>
-	{% include "header.twig" %}
-
-	{% if loadview == "login"  %}
-		{% include "login.twig" %}
-	{% endif %}
-	{% if loadview == "dash" %}
-		{% include "dash.twig" %}
-	{% endif %}
-	{% if loadview == "landingpage" %} 
-		{% include "landingpage.twig" %}
-	{% endif %}
-
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				{% include "header.twig" %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				{% if loadview == "dashboard" %}
+					{% include "dash.twig" %}
+				{% endif %}
+				{% if loadview == "home" %} 
+					{% include "landingpage.twig" %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
