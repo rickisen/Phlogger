@@ -23,9 +23,11 @@ class UserSession {
 		$row = $result->fetch_assoc();
 
 		while ( $row = $result->fetch_assoc() ) {
-			$this->user[] = new user($row['id'], $row['Username'], $row['Password'], 
-                                   $row['Rank']);
+			$this->user[] = new user(
+				$row['id'],
+				$row['Username'], 
+				$row['Password'], 
+				$row['Rank']);
 		}
-
 	}
 }
