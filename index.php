@@ -13,8 +13,11 @@ require_once 'classes/Statistics.class.php';
 // Start a session 
 session_start();
 
+$loadview = 'landingpage';
+if (isset($_GET['loadview'])) {
+	$loadview = $_GET['loadview'];
+}
 
-$loadview = $_GET['loadview'];
 
 $data = [
 	'loadview' => $loadview
