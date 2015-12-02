@@ -11,6 +11,8 @@ class UserSession {
 	}
 
 	function login() {
-		
+		$database = new mysqli('localhost', 'root', '','Phlogger');
+		asdfasdf
+
 	}
 }
