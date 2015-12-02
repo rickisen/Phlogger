@@ -36,7 +36,11 @@ if (isset($_GET['loadview'])) {
 $dataBase = new DataPuller();
 
 // create and render the twig-templates 
-$page = new PagePrinter( ['user' => $_SESSION['user'], 'dataBase' => $dataBase ]);
+if (isset($_SESSION['user'])){
+  $page = new PagePrinter(['user' => $_SESSION['user'], 'dataBase' => $dataBase ]);
+} else {
+  $page = new PagePrinter(['dataBase' => $dataBase ]);
+}
 echo $page->render();
 
 //echo $loadview;
