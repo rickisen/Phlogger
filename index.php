@@ -4,7 +4,7 @@
     include $classname . '.class.php';
 }*/
 
-require_once 'classes/User.class.php';
+require_once 'classes/UserSession.class.php';
 require_once 'classes/Post.class.php';
 require_once 'classes/Comment.class.php';
 require_once 'classes/PagePrinter.class.php';
@@ -17,7 +17,6 @@ $loadview = 'landingpage';
 if (isset($_GET['loadview'])) {
 	$loadview = $_GET['loadview'];
 }
-
 
 $data = [
 	'loadview' => $loadview
