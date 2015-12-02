@@ -6,6 +6,8 @@ class UserSession {
 	function __construct ($username, $password) {
 		$this->mysqli = new mysqli('localhost', 'root', '','Phlogger');
 
+		$this->username = $this->mysqli->stripslashes($username); // stripslashes: Returns a string with backslashes stripped off. (\' becomes ' and so on.) Double backslashes (\\) are made into a single backslash (\). 
+		$this->password = $this->mysqli->stripslashes($password);
 		$this->username = $this->mysqli->real_escape_string($username);
 		$this->password = $this->mysqli->real_escape_string($password);
 
