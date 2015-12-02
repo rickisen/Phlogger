@@ -25,11 +25,16 @@ class UserSession {
 			while ( $row = $result->fetch_assoc() ) {
 				if ($row['Username'] == $this->username && $row['Password'] == $this->password){
 					$this->rank = $row['Rank'];
-					$this->isLoggedIn == TRUE;
+					$this->isLoggedIn = TRUE;
 				} 
 			}	
 		} else {
 			return FALSE;
 		}
 	}
+
+        function __get($x){
+          return $this->$x;
+        }
+
 }
