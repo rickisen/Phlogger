@@ -27,10 +27,9 @@ class UserSession {
 			$this->rank[] = $row['rank'];
 		}	
 
-		if ( isset ($this->username) ){
+		if($row['username'] == $this->username && $row[password] == $this->password)
 			$IsLoggedIn = true;
-		} else {
+		else
 			$IsLoggedIn = false;
-		}
 	}
 }
