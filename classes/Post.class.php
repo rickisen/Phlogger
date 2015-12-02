@@ -23,11 +23,10 @@ class Post{
   }
 
   function __isset($name) {
-    if ( isset ($this->$name) ) {
-      return true; 
-    } else {
-      return false;
+    if (isset($this->$name)){
+        return true;
+      } else {
+        return false;
+      }
     }
-  }
-
 }
