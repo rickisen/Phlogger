@@ -11,8 +11,21 @@ class UserSession {
 	}
 
 	function login() {
-		$database = new mysqli('localhost', 'root', '','Phlogger');
-		asdfasdf
+		$mysqli = new mysqli('localhost', 'root', '','Phlogger');
+
+		$query = 'SELECT * 
+					FROM user
+					WHERE user.username = "$username"
+					and user.password = "$password"
+				 ';
+
+		$result = $mysqli->query($query);
+		$row = $result->fetch_assoc();
+
+		while ( $row = $result->fetch_assoc() ) {
+			$this->user[] = new user($row['id'], $row['Username'], $row['Password'], 
+                                   $row['Rank']);
+		}
 
 	}
 }
