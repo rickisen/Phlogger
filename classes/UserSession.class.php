@@ -13,23 +13,19 @@ class UserSession {
 	}
 
 	function login() {
-		$query = 'SELECT * 
-		FROM user 
-		WHERE user.username = '.$this->username.'
-		AND user.password = '.$this->password;
+		$query = 'SELECT Username, Password
+		FROM user';
 
 		$result = $this->mysqli->query($query);
 		$row = $result->fetch_assoc();
 
 		while ( $row = $result->fetch_assoc() ) {
-			$this->user[] = new user(
-				$row['id'],
-				$row['Username'], 
-				$row['Password'], 
-				$row['Rank']);
+			$this->username[] = $row['username'];
+			$this->password[] = $row['password'];
+			$this->rank[] = $row['rank'];
 		}	
 
-		if ( isset ($this->user) ){
+		if ( isset ($this->username) ){
 			$IsLoggedIn = true;
 		} else {
 			$IsLoggedIn = false;
