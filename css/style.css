@@ -14,3 +14,17 @@
 	background-position: right center, left top;
 	color: #FFF;
 }
+
+.thumbnail {
+	height: 425px;
+}
+
+.thumbnail p, .thumbnail h5 {
+	width: 242px;
+	margin: 10px auto;
+}
+
+.thumbnail a {
+	position: absolute;
+	bottom: 35px;
+}
