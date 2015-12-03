@@ -6,3 +6,9 @@
     font-size: 18px;
     line-height: 20px;
 }
+
+#jumbo {
+	background-image: url(http://thomaskjellberg.se/wp-content/uploads/2015/03/bakgrund2.jpg);
+	background-size: 100%;
+	background-position: right center, left top;
+}

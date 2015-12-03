@@ -22,18 +22,17 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
+				
+				{% if loadview == "landingpage" %} 
+					{% include "landingpage.twig" %}
+				{% endif %}
 				{% if loadview == "dashboard" %}
 					{% include "dash.twig" %}
 				{% endif %}
-				{% if loadview == "home" %} 
-					{% include "landingpage.twig" %}
-				{% endif %}
+				
 			</div>
 
-			{% for post in dataBase.post %}
-				sdgfhjk
-				{{ post.title }}
-			{% endfor %}	
+				
 		</div>
 	</div>
 

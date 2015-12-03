@@ -37,8 +37,9 @@ $dataBase = new DataPuller();
 
 // create and render the twig-templates 
 if (isset($_SESSION['user'])){
-  $page = new PagePrinter(['user' => $_SESSION['user'], 'dataBase' => $dataBase ]);
+  $page = new PagePrinter(['user' => $_SESSION['user'], 'dataBase' => $dataBase, 'loadview' => $loadview]);
 } else {
-  $page = new PagePrinter(['dataBase' => $dataBase ]);
+  $page = new PagePrinter(['dataBase' => $dataBase, 'loadview' => $loadview ]);
 }
 echo $page->render();
+
