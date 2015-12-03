@@ -2,6 +2,7 @@
 class Post{
   private $title, $content, $author, $timestamp, $id, $tags = array(), $comments = array();
 
+
   function __construct($title, $content, $author, $timestamp, $id, $tags = array(), $comments = array()){
     $this->title      = $title;
     $this->content    = $content;
@@ -45,4 +46,19 @@ class Post{
     return $ret;
   }
 
+  function getComments(){
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+    $qAllComments = '
+      SELECT *
+      FROM comment 
+      WHERE comment.post = '.$id.'
+    ';
+
+    $result = $database->query($qAllComments);
+    while ($row = $result->fetch_assoc()) {
+      $this->comments[] = new Comment($row['Content'], $row['Signature'], $row['Date'] );
+    }
+
+    return $this->comments;
+  }
 }
