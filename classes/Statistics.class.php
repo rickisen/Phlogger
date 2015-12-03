@@ -49,7 +49,8 @@ class Statistics {
                 return $row['avarage'];
 
               elseif (isset($row['topThreeList']))
-                return $row['topThreeList'];
+
+                return explode('|', $row['topThreeList']);
 
               elseif (isset($row['total_amount_of_posts'])) 
                 return $row['total_amount_of_posts']; 
