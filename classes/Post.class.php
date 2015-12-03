@@ -37,6 +37,11 @@ class Post{
     for ($i = 0 ; $i < 150 && isset($this->content[$i])  ; $i++){
       $ret .= $this->content[$i];  
     }
+    
+    // add epilepsy
+    if ( strlen($ret) > 149 )
+      $ret .= "...";
+
     return $ret;
   }
 
