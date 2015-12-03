@@ -1,12 +1,3 @@
-body {repeating-linear-gradient(
-	  45deg,
-	  #BFBEB8,
-	  #BFBEB8 10px,
-	  #7F7F7B 10px,
-	  #7F7F7B 20px
-	);
-}
-
 .logo {
 	color: #28a4c9;
 	float: left;
