@@ -1,0 +1,15 @@
+
+Fixa en Post view
+	Fixa sa att vi kan visa en comment
+	Fixa sa att vi kan ladda upp en comment
+
+Fixa sa att vi kan ladda upp en Post
+	Fixa sa att posts kan handtera bildlänkar
+
+Fixa search funktionen
+	En view som visar resultatet fran search
+	Tags?
+
+Less prio
+Fixa sa att post summary title funkar i firefox
+Rank till enum
