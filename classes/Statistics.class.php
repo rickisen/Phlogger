@@ -5,7 +5,7 @@ class Statistics {
         private $qNumberOfPosts        = 'SELECT count(post.id) as total_amount_of_posts FROM post';
 
         private $qAvgAmmountOfComments = '
-        SELECT AVG(counts.comments) AS "Average" 
+        SELECT AVG(counts.comment) AS "Average" 
         FROM (Select comment.post as Post_ID, count(*) as "comment" 
               From comment Group By comment.post) as counts RIGHT JOIN post 
                     ON counts.post_ID = post.id
