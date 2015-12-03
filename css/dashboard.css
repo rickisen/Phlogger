@@ -2,23 +2,33 @@
 #stats-container {
 	color: white;
 	background: #D7D9DB;
-	height: 100px;
-	line-height: 100px;
+	padding: 25px;
 	text-align: center;
 	margin-bottom: 50px;
+	overflow: hidden;
+
+}
+
+#stats-container h5 {
+	margin-top: 0px;
+} 
+
+#stats-container span {
+	border-bottom: 1px solid #999;
+	padding-bottom: 2px;
 }
 
 #stat-holder {
 	border-right: 1px solid #999;
 }
 
-#post-title {
-	width: 500px;
+/*#post-title {
+	width: 850px;
 }
 
 #post-content {
 	width: 850px;
-}
+}*/
 
 textarea {
 	resize: none;
