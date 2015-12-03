@@ -1,5 +1,4 @@
 <?php
-
 class Statistics {
         private $qNumberOfComments     = 'SELECT count(*) as total_amount_of_comments FROM comment';
         private $qNumberOfPosts        = 'SELECT count(post.id) as total_amount_of_posts FROM post';
@@ -12,11 +11,14 @@ class Statistics {
         ';
 
         private $qTopThreePosts = '
-          Select comment.Post as Post_ID, count(*) as "comment"
-          From comment
-          Group By comment.Post
-          ORDER BY comments DESC
-          LIMIT 3
+        Select group_concat(post.Title SEPARATOR " | ") as "topThreeList"
+        FROM      (Select comment.Post as Post_ID, count(*) as "comment"
+                  From comment
+                  Group By comment.Post
+                  ORDER BY comment DESC
+                  LIMIT 3) comment_amount JOIN post
+                      ON comment_amount.Post_ID = post.id
+
         ';
 
 	function __get($stat) {
@@ -42,25 +44,21 @@ class Statistics {
           $database = new mysqli('localhost', 'root', '','Phlogger');
           $result = $database->query($statQuery);
 
-      	$ret = "";
+          while ($row = $result->fetch_assoc()) {
+              if (isset($row['avarage']))
+                return $row['avarage'];
 
-        while ($row = $result->fetch_assoc()) {
+              elseif (isset($row['topThreeList']))
+                return explode('|', $row['topThreeList']);
 
-	        if (isset($row['avarage']))
-	          $ret = $row['avarage'];
+              elseif (isset($row['total_amount_of_posts'])) 
+                return $row['total_amount_of_posts']; 
 
-          	elseif (isset($row['comment']))
-              $ret[] = $row['comment'];
+              elseif (isset($row['total_amount_of_comments'])) 
+                return $row['total_amount_of_comments']; 
+            }
 
-            elseif (isset($row['total_amount_of_posts'])) 
-              $ret = $row['total_amount_of_posts']; 
-
-            elseif (isset($row['total_amount_of_comments'])) 
-              $ret = $row['total_amount_of_comments']; 
-
-          }
-
-          return $ret;
+          return "Data retrieval fucked";
 	}
 
 	function __isset($stats) {

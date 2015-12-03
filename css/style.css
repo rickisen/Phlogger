@@ -28,8 +28,12 @@ body {repeating-linear-gradient(
 	height: 425px;
 }
 
+.thumbnail img {
+	margin-top: 5px;
+}
+
 .thumbnail p, .thumbnail h5 {
-	width: 242px;
+	max-width: 242px;
 	margin: 10px auto;
 }
 
