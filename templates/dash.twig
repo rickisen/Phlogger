@@ -4,13 +4,16 @@
 	<h3>Statistics</h3>
 	<div class="container-fluid" id="stats-container">
 		<div class="row">
-			<div class="col-xs-3" id="stat-holder"><h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span></div>
-			<div class="col-xs-3" id="stat-holder"><h5>Total posts</h5><span> {{ dataBase.statistics.count_total_posts }} </span></div>
-			<div class="col-xs-3" id="stat-holder"><h5>Avarage comments</h5><span> {{ dataBase.statistics.avg_comment_post }} </span></div>
-			<div class="col-xs-3">				   <h5>Total posts</h5><span>1337</span></div>
+			<div class="col-xs-4" id="stat-holder"><h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span></div>
+			<div class="col-xs-4" id="stat-holder"><h5>Total posts</h5><span> {{ dataBase.statistics.count_total_posts }} </span></div>
+			<div class="col-xs-4"><h5>Avarage comments</h5><span> {{ dataBase.statistics.avg_comment_post }} </span></div>
 		</div>
 	</div>
-
+	
+	<div class="asdf" style="text-align: center; margin-top: -25px;">
+	<h5 style="display: inline-block; text-align: center;">Your three most popular posts:&nbsp;</h5><p style="display: inline-block"><a href="#">Asdsda</a>, <a href="#">Gertretr</a>, <a href="#">Heatonär</a>, <a href="#">Encoool</a>, <a href="#">Grabberino</a> </p>
+	</div>
+	
 	{# Create new post #}
 	<h3>Create new post</h3>
 	<div class="container-fluid" id="form-container">
