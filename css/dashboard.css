@@ -12,6 +12,14 @@
 	border-right: 1px solid #999;
 }
 
+#post-title {
+	width: 500px;
+}
+
+#post-content {
+	width: 850px;
+}
+
 textarea {
 	resize: none;
 }
