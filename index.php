@@ -21,7 +21,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && !isset($_SESSION['
 //
 // What happens if someone manualy puts in a get request for dash?!!
 //
-if ( isset($_SESSION['user']) /* && $_SESSION['user']->isloggedIn */ ) {
+if ( isset($_SESSION['user']) && $_SESSION['user']->isloggedIn  ) {
   $loadview = 'dash';
 } else {
   $loadview = 'landingpage';
@@ -41,5 +41,5 @@ if (isset($_SESSION['user'])){
 } else {
   $page = new PagePrinter(['dataBase' => $dataBase, 'loadview' => $loadview ]);
 }
-echo $page->render();
 
+echo $page->render();

@@ -11,14 +11,10 @@ class Statistics {
 	}
 
 	function __get($stats) {
-		$this->$stats;
+		return $this->$stats;
 	}
 
 	function __isset($stats) {
-	    if (isset($this->$stats)){
-	        return true;
-	      } else {
-	        return false;
-	      }
-	    }
+	    return isset($this->$stats);
+        }
 }
