@@ -5,7 +5,7 @@ class Statistics {
         private $qNumberOfPosts        = 'SELECT count(post.id) as total_amount_of_posts FROM post';
 
         private $qAvgAmmountOfComments = '
-        SELECT AVG(counts.comment) AS "Average" 
+        SELECT AVG(counts.comment) AS "avarage" 
         FROM (Select comment.post as Post_ID, count(*) as "comment" 
               From comment Group By comment.post) as counts RIGHT JOIN post 
                     ON counts.post_ID = post.id
@@ -40,15 +40,26 @@ class Statistics {
           }
 
           $database = new mysqli('localhost', 'root', '','Phlogger');
-          $result = $database->query($statQuery) ;
-          while ($row = $result->fetch_assoc()) {
-            if (isset($row['comment']))
+          $result = $database->query($statQuery);
+
+      	$ret = "";
+
+        while ($row = $result->fetch_assoc()) {
+
+	        if (isset($row['avarage']))
+	          $ret = $row['avarage'];
+
+          	elseif (isset($row['comment']))
               $ret[] = $row['comment'];
+
             elseif (isset($row['total_amount_of_posts'])) 
               $ret = $row['total_amount_of_posts']; 
+
             elseif (isset($row['total_amount_of_comments'])) 
               $ret = $row['total_amount_of_comments']; 
+
           }
+
           return $ret;
 	}
 
