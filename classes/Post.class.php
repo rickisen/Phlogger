@@ -29,4 +29,15 @@ class Post{
         return false;
       }
     }
+
+  // goes through all the characters in 
+  // the content and returns a maximum of 150 characters
+  function summary(){
+    $ret = "";
+    for ($i = 0 ; $i < 150 && isset($this->content[$i])  ; $i++){
+      $ret .= $this->content[$i];  
+    }
+    return $ret;
+  }
+
 }
