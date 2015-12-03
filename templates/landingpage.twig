@@ -10,7 +10,7 @@
       
     <div class="row">
       {% set x = 10 %}
-      {% for post in dataBase.posts %}
+      {% for post in dataBase.groupedPosts.0 %}
         {% include 'post_summary.twig' %}
       {% endfor %}
     </div>
