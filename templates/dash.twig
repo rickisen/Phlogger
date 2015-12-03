@@ -18,20 +18,16 @@
 
 			</div>
 		</div>
-	
 
-	<div class="asdf" style="text-align: center; margin-top: -25px;">
-	<h5 style="display: inline-block; text-align: center;">Your three most popular posts:&nbsp;</h5><p style="display: inline-block"><p style="display:inline-block";> 
-
-	{% for top_post in dataBase.statistics.three_most_commented_posts %}
-		{{ top_post }}
-	{% endfor %}
-
-	</p>
+	<div id="popular-posts">
+		<h5>Your three most popular posts:&nbsp;</h5>
+		<p> 
+			{% for top_post in dataBase.statistics.three_most_commented_posts %}
+				{{ top_post }}
+			{% endfor %}
+		</p>
 	</div>
 
-
-	
 	{# Create new post #}
 	<h3>Create new post</h3>
 	<div class="container-fluid" id="form-container">
