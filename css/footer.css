@@ -2,6 +2,8 @@
 	background: #EEF0F2;
 	text-align: center;
 	height: 125px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 }
 
 #footer-container h5 {
