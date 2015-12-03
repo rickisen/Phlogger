@@ -33,7 +33,7 @@ class DataPuller{
     $result = $database->query($this->qAllPosts);
     while ($row = $result->fetch_assoc()) {
       $this->posts[] = new Post($row['Title'], $row['Content'], $row['Author'], 
-                                   $row['Timestamp'], $row['id'], array());
+                                   $row['Timestamp'], $row['id']);
     }
 
     // Construct statistics
