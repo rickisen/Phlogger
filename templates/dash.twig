@@ -4,11 +4,20 @@
 	<h3>Statistics</h3>
 	<div class="container-fluid" id="stats-container">
 		<div class="row">
-			<div class="col-xs-4" id="stat-holder"><h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span></div>
-			<div class="col-xs-4" id="stat-holder"><h5>Total posts</h5><span> {{ dataBase.statistics.count_total_posts }} </span></div>
-			<div class="col-xs-4"><h5>Avarage comments</h5><span> {{ dataBase.statistics.avg_comment_post }} </span></div>
+			
+			<div class="col-xs-4" id="stat-holder">
+				<h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span>
+			</div>
+
+			<div class="col-xs-4" id="stat-holder">
+				<h5>Total posts</h5><span> {{ dataBase.statistics.count_total_posts }} </span>
+			</div>
+
+			<div class="col-xs-4">
+				<h5>Avarage comments</h5><span> {{ dataBase.statistics.avg_comment_post }} </span></div>
+
+			</div>
 		</div>
-	</div>
 	
 	<div class="asdf" style="text-align: center; margin-top: -25px;">
 	<h5 style="display: inline-block; text-align: center;">Your three most popular posts:&nbsp;</h5><p style="display: inline-block"><a href="#">Asdsda</a>, <a href="#">Gertretr</a>, <a href="#">Heatonär</a>, <a href="#">Encoool</a>, <a href="#">Grabberino</a> </p>
@@ -20,7 +29,7 @@
 		<div class="row">
 			<form action="" method="post">
 				Title<input type="text" class="form-control" name="title" id="post-title"><br>
-				Text<textarea rows="7" class="form-control" name="content" id="post-content">ASDSADSADSS</textarea><br>
+				Text<textarea rows="7" class="form-control" name="content" id="post-content"></textarea><br>
 				<form>
 				Image (Paste your image URL here)<input type="text" class="form-control" name="title" id="post-title">
 				<button type="submit" class="btn btn-info" id="post-btn">Post</button>
