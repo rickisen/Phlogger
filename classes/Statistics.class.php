@@ -11,7 +11,7 @@ class Statistics {
         ';
 
         private $qTopThreePosts = '
-        Select group_concat(post.Title) as "topThreeList"
+        Select group_concat(post.Title SEPARATOR ' | ') as "topThreeList"
         FROM      (Select comment.Post as Post_ID, count(*) as "comment"
                   From comment
                   Group By comment.Post
