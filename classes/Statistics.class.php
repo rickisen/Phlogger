@@ -35,7 +35,7 @@ class Statistics {
             $statQuery = $this->qTopThreePosts;
           break;
           default:
-            return FALSE;
+            return $this->$stat;
           break;
           }
 
@@ -44,8 +44,10 @@ class Statistics {
           while ($row = $result->fetch_assoc()) {
             if (isset($row['comment']))
               $ret[] = $row['comment'];
-            else 
-              $ret = $row[0]; 
+            elseif (isset($row['total_amount_of_posts'])) 
+              $ret = $row['total_amount_of_posts']; 
+            elseif (isset($row['total_amount_of_comments'])) 
+              $ret = $row['total_amount_of_comments']; 
           }
           return $ret;
 	}
