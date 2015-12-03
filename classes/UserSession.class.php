@@ -30,8 +30,12 @@ class UserSession {
                 }	
 	}
 
-        function __get($x){
-          return $this->$x;
-        }
+    function __get($x){
+      return $this->$x;
+    }
+
+	function __isset($x){
+	  return isset($this->$x);
+	}
 
 }
