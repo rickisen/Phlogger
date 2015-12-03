@@ -52,4 +52,12 @@ class DataPuller{
                                        $stats['qTopThreePosts']);
   }
 
+    function __get($x){
+      return $this->$x;
+    }
+
+    function __isset($x){
+      return isset($this->$x);
+    }
+
 }
