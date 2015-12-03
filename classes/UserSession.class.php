@@ -22,12 +22,12 @@ class UserSession {
 
 		$result = $this->mysqli->query($query);
                                 
-                while ( $row = $result->fetch_assoc() ) {
-                        if ($row['Username'] == $this->username && $row['password'] == $this->password){
-                                $this->rank = $row['Rank'];
-                                $this->isLoggedIn = TRUE;
-                        } 
-                }	
+        while ( $row = $result->fetch_assoc() ) {
+            if ($row['Username'] == $this->username && $row['password'] == $this->password){
+	                $this->rank = $row['Rank'];
+	                $this->isLoggedIn = TRUE;
+            } 
+        }	
 	}
 
     function __get($x){
