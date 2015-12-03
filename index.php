@@ -22,7 +22,7 @@ if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $
 // What happens if someone manualy puts in a get request for dash?!!
 //
 if ( isset($_SESSION['user']) && $_SESSION['user']->isLoggedIn  ) {
-  $loadview = 'dash';
+  $loadview = 'dashboard';
 } else {
   $loadview = 'landingpage';
 }
