@@ -1,0 +1,9 @@
+#footer-container {
+	background: #EEF0F2;
+	text-align: center;
+	height: 125px;
+}
+
+#footer-container h5 {
+	margin-top: 35px;
+}
