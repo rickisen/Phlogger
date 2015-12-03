@@ -12,8 +12,8 @@
 	border-right: 1px solid #999;
 }
 
-#post-content-input {
-	height: 250px;
+textarea {
+	resize: none;
 }
 
 #post-btn {
