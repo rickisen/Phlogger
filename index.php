@@ -11,17 +11,17 @@ require_once 'classes/Statistics.class.php';
 session_start();
 
 // Check if we got a login request
-if (isset($_POST['username']) && isset($_POST['password']) && !isset($_SESSION['user'])){
+if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $_SESSION"
   $_SESSION['user'] = new UserSession($_POST['username'], $_POST['password']);  // escaped in the user class constructor
 } elseif ( isset($_POST['logout']) && isset($_SESSION['user'])) {
-  unsset($_SESSION['user']);
+  unset($_SESSION['user']);
 }
 
 // Different default pages load depending on if we are loged in
 //
 // What happens if someone manualy puts in a get request for dash?!!
 //
-if ( isset($_SESSION['user']) && $_SESSION['user']->isloggedIn  ) {
+if ( isset($_SESSION['user']) && $_SESSION['user']->isLoggedIn  ) {
   $loadview = 'dash';
 } else {
   $loadview = 'landingpage';

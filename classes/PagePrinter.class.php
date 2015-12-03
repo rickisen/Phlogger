@@ -4,7 +4,7 @@ require_once 'twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 
 Class PagePrinter {
-  private $data = array(), $loader, $twig, $target = 'index.twig';
+  private $data = array(), $loader, $twig, $target = 'index.twig'; //ändra "setTarget"
 
   function __construct($data){
     $this->data   = $data;
