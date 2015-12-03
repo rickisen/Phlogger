@@ -1,0 +1,21 @@
+
+#stats-container {
+	color: white;
+	background: #D7D9DB;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+#stat-holder {
+	border-right: 1px solid #999;
+}
+
+#post-content-input {
+	height: 250px;
+}
+
+#post-btn {
+	margin-top: 15px;
+}
