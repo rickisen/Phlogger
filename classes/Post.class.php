@@ -51,7 +51,7 @@ class Post{
     $qAllComments = '
       SELECT *
       FROM comment 
-      WHERE comment.post = '.$id.'
+      WHERE comment.post = '.$this->id.'
     ';
 
     $result = $database->query($qAllComments);
