@@ -2,20 +2,15 @@
 	<div class="row">
 	<div class="col-xs-12">
 		<div class="col-xs-8 col-xs-offset-2">
-			<h2>Test test<!--$title?--></h2>
+			<h2>{{ attribute(dataBase.posts, readmore).title }}</h2>
 		</div>
 		<div class="col-xs-8 col-xs-offset-2 mrg-btm-15">
 			<!--$img-->
 			<!--$content?-->
-			test test test test test test test test test test test test test test test test test test test test test
-			test test test test test test test test test test test test test test test test test test test test test
-			test test test test test test test test test test test test test test test test test test test test test
-			test test test test test test test test test test test test test test test test test test test test test
-			test test test test test test test test test test test test test test test test test test test test test
-			test test test test test test test test test test test test test test test test test test test test test
+			<p>{{ attribute(dataBase.posts, readmore).content }}</p>
 		</div>
 		<div class="col-xs-8 col-xs-offset-2 italic mrg-btm-15">
-			miniTops<!--$author--> - datum <!--$Timestamp-->
+			{{ attribute(dataBase.posts, readmore).author }} - datum {{ attribute(dataBase.posts, readmore).timestamp }}
 		</div>
 	</div>
 	</div>
