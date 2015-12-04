@@ -30,8 +30,6 @@ if (isset($_GET['home']) && $_GET['home'] == 'true') {
 	$readmore = "";
 }
 
-
-
 // Different default pages load depending on if we are loged in
 //
 // What happens if someone manualy puts in a get request for dash?!!
