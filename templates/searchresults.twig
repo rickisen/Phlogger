@@ -10,7 +10,8 @@
 					<b>Author: Namn Somfan</b>
 					<p>{{ post.timestamp }}</p>
 					<p>{{ post.summary }}</p>
-					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p>
+					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p><br>
+		      		<button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ post.id }}">Read more</button>
 					<hr>
 				</div>
 			{% endfor %}
