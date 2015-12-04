@@ -1,6 +1,6 @@
 <?php
 class DataPuller{
-  private  $groupedPosts = array(), $posts = array(), $statistics;
+  private  $groupedPosts = array(), $posts = array(), $statistics, $searchResults ;
 
   // query to get all posts
   private $qAllPosts = 'SELECT * FROM post ORDER BY Timestamp DESC';
@@ -54,17 +54,14 @@ class DataPuller{
           OR title   LIKE "'.$searchFor.'%"  OR title   LIKE "'.$searchFor.'" 
     ';
 
-    $ret = array();
     if ( $result = $database->query($searchQuery)){
       while ($row = $result->fetch_assoc()) {
-        $ret[] = new Post($row['Title'], $row['Content'], $row['Author'], $row['Timestamp'], $row['id'] );
+        $this->searchResults[] = new Post($row['Title'], $row['Content'], $row['Author'], $row['Timestamp'], $row['id'] );
       }
     } else {
-      echo $database->error ;
+      echo 'Something went wrong with the search: '.$database->error ;
       return FALSE;
     }
-
-
-    return $ret;
+    return TRUE;
   }
 }
