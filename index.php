@@ -11,6 +11,10 @@ require_once 'classes/Statistics.class.php';
 // Start a session 
 session_start();
 
+// grabs the posts,comments,tags from the data 
+// base and makes objects from them
+$dataBase = new DataPuller();
+
 if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn) {
 	unset($_SESSION['user']);
 }
@@ -24,6 +28,7 @@ if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $
 // Check for search inputs
 if (isset($_GET['search'])) {
 	$searchInput = $_GET['search'];
+	$dataBase -> search($searchInput);
 }
 
 if (isset($_GET['home']) && $_GET['home'] == 'true') {
@@ -49,10 +54,6 @@ $readmore = "";
 if (isset($_GET['readmore'])) {
 	$readmore = $_GET['readmore'];
 }
-
-// grabs the posts,comments,tags from the data 
-// base and makes objects from them
-$dataBase = new DataPuller();
 
 // create and render the twig-templates 
 if (isset($_SESSION['user'])){
