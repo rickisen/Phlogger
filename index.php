@@ -7,6 +7,7 @@ require_once 'classes/Comment.class.php';
 require_once 'classes/PagePrinter.class.php';
 require_once 'classes/Statistics.class.php';
 
+
 // Start a session 
 session_start();
 
@@ -18,6 +19,11 @@ if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $
   $_SESSION['user'] = new UserSession($_POST['username'], $_POST['password']);  // escaped in the user class constructor
 } elseif ( isset($_POST['logout']) && isset($_SESSION['user'])) {
   unset($_SESSION['user']);
+}
+
+// Check for search inputs
+if (isset($_GET['search'])) {
+	$searchInput = $_GET['search'];
 }
 
 // Different default pages load depending on if we are loged in

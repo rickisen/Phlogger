@@ -3,7 +3,7 @@ class DataPuller{
   private  $groupedPosts = array(), $posts = array(), $statistics;
 
   // query to get all posts
-  private $qAllPosts = 'SELECT * FROM post ORDER BY Timestamp';
+  private $qAllPosts = 'SELECT * FROM post ORDER BY Timestamp DESC';
 
   function __construct() { 
     $database = new mysqli('localhost', 'root', '','Phlogger');
