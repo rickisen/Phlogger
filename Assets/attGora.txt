@@ -1,15 +1,20 @@
 
-Fixa en Post view
+Fixa en Post view 					Tobbie
 	Fixa sa att vi kan visa en comment
 	Fixa sa att vi kan ladda upp en comment
 
-Fixa sa att vi kan ladda upp en Post
+Fixa sa att vi kan ladda upp en Post			Ricky
 	Fixa sa att posts kan handtera bildlänkar
 
 Fixa search funktionen
 	En view som visar resultatet fran search
 	Tags?
 
+Landing page						Tommy
+	previous entries
+	länka till postview
+
 Less prio
 Fixa sa att post summary title funkar i firefox
 Rank till enum
+Fixa namngivning i databasen
