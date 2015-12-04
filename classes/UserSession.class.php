@@ -13,7 +13,7 @@ class UserSession {
   }
 
   function login() {
-      $query = 'SELECT Username, password, Rank FROM user';
+      $query = 'SELECT Username, password, Rank, id FROM user';
 
       $result = $this->mysqli->query($query);
                       
