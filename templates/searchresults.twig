@@ -3,12 +3,13 @@
 {# 		{{ searchInput }}
  #}		<div class="col-sm-12">
  		<h2>Search results for: {{ dataBase.searchInput }}</h2>
+ 		<p>Amount of posts related to your search: {{ dataBase.searchResults|length }}</p>
 			{% for post in dataBase.searchResults %}
 				<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 					<h4><b>Title: {{ post.title }} </b><br></h4>
 					<b>Author: Namn Somfan</b>
 					<p>{{ post.summary }}</p>
-					<p style="display: inline-block">Amount of comments: {{ post.comments|length }}</p>
+					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p>
 					<hr>
 				</div>
 			{% endfor %}
