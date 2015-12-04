@@ -17,8 +17,11 @@
 
 	<div class="row">
 		<div class="col-xs-8 col-xs-offset-2">
-			<!--$comment, egen .twig?-->
+			{% for comment in attribute(dataBase.posts, readmore).getComments %}
+				<h4>{{comment.signature}} Commented:</h4>
+				<p>{{comment.content}}</p>
+			{% endfor %}
+			</div>
 		</div>
 	</div>
-</div>
 
