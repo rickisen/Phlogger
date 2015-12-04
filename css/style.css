@@ -22,7 +22,7 @@
 }
 
 .thumbnail {
-	height: 425px;
+	height: 450px;
 }
 
 .thumbnail img {
@@ -37,4 +37,10 @@
 .thumbnail button {
 	position: absolute;
 	bottom: 35px;
+}
+
+.commentamount {
+	position: absolute;
+	bottom: 30px;
+	right: 40px;
 }
