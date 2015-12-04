@@ -83,4 +83,31 @@ class Post{
       return FALSE;
     }
   }
+
+  function getTags(){
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
+    $qAllOurTags = '
+      SELECT Tag.*
+      FROM Tag LEFT JOIN p_Has_t
+           ON p_Has_t.tagID = Tag.id
+      WHERE p_Has_t.postID = '.$this->id.'
+    ';
+
+    if( $result = $database->query($qAllOurTags) ) {
+      while ($row = $result->fetch_assoc()) {
+        $this->tags[] = new Tag($row['Name'], $row['id']);
+      }
+    } else {
+      echo "Error when trying to get a Tag: ".$database->error;
+      return FALSE;
+    }
+
+    return $this->tags;
+  }
+
+
+
+
+
 }
