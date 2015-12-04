@@ -7,6 +7,7 @@ require_once 'classes/Comment.class.php';
 require_once 'classes/PagePrinter.class.php';
 require_once 'classes/Statistics.class.php';
 
+
 // Start a session 
 session_start();
 
