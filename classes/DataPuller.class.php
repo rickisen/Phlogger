@@ -5,6 +5,9 @@ class DataPuller{
   // query to get all posts
   private $qAllPosts = 'SELECT * FROM post join user on post.Author = user.id ORDER BY Timestamp DESC';
 
+  // All tags
+  private $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC';
+
   function __construct() { 
     $database = new mysqli('localhost', 'root', '','Phlogger');
     
