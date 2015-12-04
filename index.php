@@ -67,6 +67,11 @@ if ( isset ($_POST['postTitle']) && isset($_POST['postContent']) && isset($_POST
 	$blogPost->storePost();
 }
 
+if ( isset ($_POST['commentContent']) && isset($_POST['commentSignature'])) {
+	$blogComment = new Comment($_POST['commentContent'], $_POST['commentSignature']);
+	$blogComment->storeComment();
+}
+
 // create and render the twig-templates 
 if (isset($_SESSION['user'])){
   $page = new PagePrinter(['user' => $_SESSION['user'], 'dataBase' => $dataBase, 'loadview' => $loadview]);
