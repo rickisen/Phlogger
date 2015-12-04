@@ -9,6 +9,7 @@ CREATE TABLE `post` (
   `Content` text COLLATE utf8_bin NOT NULL,
   `Timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Author` smallint(6) NOT NULL,
+  `Image` varchar(40) COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`),
   KEY `Author` (`Author`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`Author`) REFERENCES `user` (`id`)
