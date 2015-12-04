@@ -10,10 +10,16 @@
 					<!--$content?-->
 					<p>{{ attribute(dataBase.posts, readmore).content }}</p>
 				</div>
-				<div class="col-xs-8 col-xs-offset-2 italic mrg-btm-15">
-					{{ attribute(dataBase.posts, readmore).author }} - datum {{ attribute(dataBase.posts, readmore).timestamp }}
+				<div class="col-xs-8 col-xs-offset-2 italic">
+					<b>Posted by</b>: {{ attribute(dataBase.posts, readmore).author }} - datum {{ attribute(dataBase.posts, readmore).timestamp }}
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2"><hr>
+			{% include 'comment.twig' %}
 		</div>
 	</div>
 
