@@ -3,7 +3,7 @@
 		<div class="col-xs-12">
 			<h3>Browse categories by tags</h3>
 				{% for tag in tags %}
-					 <form class="" role="logout" action="" method="get">
+					 <form action="" method="get" style="display: inline-block;">
 				        <button type="submit" name="readmore" value="{{ tag.id }}"> {{ tag.name }} </button>
 				    </form>
 				{% endfor %}
