@@ -11,12 +11,6 @@ class Post{
     $this->id         = $id;
     $this->tags       = $tags;
 
-    foreach ($comments as $comment)
-      $this->comments[] = new Comment(
-      $comment['content'],
-      $comment['signature'],
-      $comment['date']
-      );
   }
 
   function __get($name){
