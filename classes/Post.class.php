@@ -72,11 +72,11 @@ class Post{
     $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
       VALUES (\''.$content.'\', \''.$image.'\',\''.$user.'\', \''.$title.'\' )';
 
-    // send the dml query to the db and save the responce
-    $responce = $database->query($upQuery);
+    // send the dml query to the db and save the response
+    $response = $database->query($upQuery);
 
     // lazy error reporting
-    if ($responce) {
+    if ($response) {
       return TRUE; // it worked!
     } else {
       echo "Error when trying to upload a post: ".$database->error;
