@@ -34,7 +34,7 @@ class DataPuller{
     // put the 3 latest posts into an easily obtainable array
     $i = 0;
     while ($i < 3){
-      $threePosts[] = $posts[$i++];
+      $threePosts[] = $this->posts[$i++];
     }
 
     // Create a statistics object
