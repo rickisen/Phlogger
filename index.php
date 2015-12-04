@@ -19,8 +19,10 @@ if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $
 
 // Check for search inputs
 if (isset($_GET['search'])) {
-	$searchInput = (isset($_GET['search']));
+	$searchInput = $_GET['search'];
 }
+
+echo $searchInput;
 
 // Different default pages load depending on if we are loged in
 //
