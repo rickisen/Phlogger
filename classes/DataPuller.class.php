@@ -55,10 +55,15 @@ class DataPuller{
     ';
 
     $ret = array();
-    $result = $database->query($searchQuery);
-    while ($row = $result->fetch_assoc()) {
-      $ret[] = new Post($row['Title'], $row['Content'], $row['Author'], $row['Timestamp'], $row['id'] );
+    if ( $result = $database->query($searchQuery)){
+      while ($row = $result->fetch_assoc()) {
+        $ret[] = new Post($row['Title'], $row['Content'], $row['Author'], $row['Timestamp'], $row['id'] );
+      }
+    } else {
+      echo $database->error ;
+      return FALSE;
     }
+
 
     return $ret;
   }
