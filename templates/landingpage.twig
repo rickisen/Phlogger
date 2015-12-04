@@ -14,8 +14,18 @@
     <h4 style="display:inline-block;">Browse posts by popular tags: </h4><p style="display:inline-block;"> &nbsp; 
 
     <form class="" role="logout" action="" method="get">
-        <button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ tag.id }}">Read more</button>
-    </form>Asdsa, Asdsa, Asdasda, Asdsad, Asdasd, Asdsa, Asdasdgfd</p>
+        <button type="submit" name="tags" value="tags">Click here to view all tags</button>
+    </form>
+
+
+  <hr>
+  {% for tag in dataBase.tags %}
+    <form class="" role="logout" action="" method="get">
+        <button type="submit" name="readmore" value="{{ tag.id }}"> {{ tag.name }} </button>
+    </form>
+   {% endfor %}
+
+
 
     <h2>Latest blog posts</h2>
       
@@ -24,5 +34,12 @@
         {% include 'post_summary.twig' %}
       {% endfor %}
     </div>
+
+  <div class="row">
+    <div class="col-xs-12" id="footer-container">
+      {% include "footer.twig" %}
+    </div>
+  </div>
+
   </div>
 </div>

@@ -50,9 +50,8 @@ if (isset($_GET['readmore'])) {
 	$readmore = $_GET['readmore'];
 }
 
-$tag = "";
 if (isset($_GET['tags'])) {
-	$readmore = $_GET['tags'];
+	$loadview = $_GET['tags'];
 }
 
 // Check for search inputs and render search result view
