@@ -1,9 +1,11 @@
 .logo {
+	background: transparent;
+	border: 0;
 	color: #28a4c9;
 	float: left;
-    height: 30px;
+	height: 30px;
     padding-top: 13px;
-    font-size: 18px;
+	font-size: 18px;
     line-height: 20px;
     margin-left: 15px;
     border: 0px;
