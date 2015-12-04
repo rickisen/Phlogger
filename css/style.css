@@ -29,7 +29,7 @@
 	margin: 10px auto;
 }
 
-.thumbnail a {
+.thumbnail button {
 	position: absolute;
 	bottom: 35px;
 }

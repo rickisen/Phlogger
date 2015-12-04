@@ -35,12 +35,9 @@
 		<div class="row">
 			<div class="col-xs-12">
 
-				{% if loadview == "landingpage" %} 
-				{% include "landingpage.twig" %}
-				{% endif %}
-				{% if loadview == "dashboard" %}
-				{% include "dash.twig" %}
-				{% endif %}
+				
+				{% include loadview~".twig" %}
+				
 				
 			</div>
 

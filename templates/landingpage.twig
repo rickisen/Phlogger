@@ -5,11 +5,13 @@
       <p>Welcome to proj2_gruppnamns world of Phlogger</p>
       <p><a class="btn btn-info btn-sm" href="#" role="button">Learn more</a></p>
     </div>
+    {% if readmore is not empty %}
+      {% include "post.twig" %}
+    {% endif %}
     
     <h2>Latest blog posts</h2>
       
     <div class="row">
-      {% set x = 10 %}
       {% for post in dataBase.groupedPosts.0 %}
         {% include 'post_summary.twig' %}
       {% endfor %}
