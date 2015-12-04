@@ -3,10 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/dashboard.css" />
-	<link rel="stylesheet" href="css/footer.css" />
-
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -21,6 +17,10 @@
 	
 
 	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/dashboard.css" />
+	<link rel="stylesheet" href="css/footer.css" />
+	<link rel="stylesheet" href="css/post.css" />
+	
 	<title>Phlogger</title>
 </head>
 
@@ -39,7 +39,7 @@
 				{% include "landingpage.twig" %}
 				{% endif %}
 				{% if loadview == "dashboard" %}
-				{% include "dash.twig" %}
+				{% include "post.twig" %} <!--byt tillbaka till dash.twig-->
 				{% endif %}
 				{% if loadview == "searchresults" %}
 				{% include "searchresults.twig" %}
