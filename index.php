@@ -22,8 +22,6 @@ if (isset($_GET['search'])) {
 	$searchInput = $_GET['search'];
 }
 
-echo $searchInput;
-
 // Different default pages load depending on if we are loged in
 //
 // What happens if someone manualy puts in a get request for dash?!!
