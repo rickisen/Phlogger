@@ -3,11 +3,14 @@
 	border: 0;
 	color: #28a4c9;
 	float: left;
-    height: 50px;
-    padding-top: 0px;
-    font-size: 18px;
+	height: 30px;
+    padding-top: 13px;
+	font-size: 18px;
     line-height: 20px;
     margin-left: 15px;
+    border: 0px;
+    background: none;
+    outline: none;
 }
 
 

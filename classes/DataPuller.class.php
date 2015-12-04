@@ -47,7 +47,7 @@ class DataPuller{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     $searchQuery = '
-      SELECT post.id FROM post 
+      SELECT * FROM post 
       WHERE  content LIKE "%'.$searchFor.'%" OR content LIKE "%'.$searchFor.'" 
           OR content LIKE "'.$searchFor.'%"  OR content LIKE "'.$searchFor.'" 
           OR title   LIKE "%'.$searchFor.'%" OR title   LIKE "%'.$searchFor.'" 
