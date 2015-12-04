@@ -1,16 +1,15 @@
 <?php 
 class Post{
-  private $title, $content, $author, $timestamp, $id, $tags = array(), $comments = array();
+  private $title, $content, $user, $image, $timestamp, $id, $tags, $comments;
 
-
-  function __construct($title, $content, $author, $timestamp, $id, $tags = array(), $comments = array()){
+  function __construct($title, $content, $image, $user = 0, $id = 0, $timestamp = "", $tags = array(), $comments = array()){
     $this->title      = $title;
     $this->content    = $content;
-    $this->author     = $author;
-    $this->timestamp  = $timestamp;
+    $this->image      = $image;
+    $this->user       = $user;
     $this->id         = $id;
+    $this->timestamp  = $timestamp;
     $this->tags       = $tags;
-
   }
 
   function __get($name){
@@ -67,13 +66,14 @@ class Post{
     // escape the input before upping
     $title     = $this->mysqli->real_escape_string($this->title);
     $content   = $this->mysqli->real_escape_string($this->content);
-    $signature = $this->mysqli->real_escape_string($this->signature);
+    $image     = $this->mysqli->real_escape_string($this->image);
+    $user      = $this->mysqli->real_escape_string($this->user);
 
-    $upQuery = 'INSERT INTO post (Content, Author, title) 
-      VALUES ('.$content.', '.$author.', '.$title.' )';
+    $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
+      VALUES ('.$content.', '.$image.','.$user.', '.$title.' )';
 
     // send the dml query to the db and save the responce
-    $responce = $database->query($upQueryA);
+    $responce = $database->query($upQuery);
 
     // lazy error reporting
     if ($responce) {

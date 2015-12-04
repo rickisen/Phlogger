@@ -12,8 +12,8 @@ class DataPuller{
     // Ignores tags for now
     $result = $database->query($this->qAllPosts);
     while ($row = $result->fetch_assoc()) {
-      $this->posts[] = new Post($row['Title'], $row['Content'], $row['Username'], 
-                                   $row['Timestamp'], $row['id']);
+      $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                $row['Username'], $row['id'],      $row['Timestamp'] );
     }
 
     // Divide the posts into groups of 12, so that 
@@ -63,7 +63,8 @@ class DataPuller{
 
     if ( $result = $database->query($searchQuery)){
       while ($row = $result->fetch_assoc()) {
-        $this->searchResults[] = new Post($row['Title'], $row['Content'], $row['Username'], $row['Timestamp'], $row['id'] );
+        $this->searchResults[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                          $row['Username'], $row['id'],      $row['Timestamp'] );
       }
     } else {
       echo 'Something went wrong with the search: '.$database->error ;
