@@ -1,6 +1,6 @@
 <?php
 class DataPuller{
-  private  $groupedPosts = array(), $posts = array(), $statistics, $searchResults ;
+  private  $threePosts = array(), $groupedPosts = array(), $posts = array(), $statistics, $searchResults ;
 
   // query to get all posts
   private $qAllPosts = 'SELECT * FROM post ORDER BY Timestamp DESC';
@@ -29,6 +29,12 @@ class DataPuller{
         ++$group;
         $this->groupedPosts[$group][] = $post;
       }
+    }
+
+    // put the 3 latest posts into an easily obtainable array
+    $i = 0;
+    while ($i < 3){
+      $threePosts[] = $posts[$i++];
     }
 
     // Create a statistics object
