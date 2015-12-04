@@ -16,9 +16,10 @@ CREATE TABLE `post` (
 
 
 CREATE TABLE `Tag` (
-  `Name` varchar(30) COLLATE utf8_bin NOT NULL
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(30) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
 
 CREATE TABLE `user` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
