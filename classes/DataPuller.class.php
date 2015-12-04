@@ -3,7 +3,7 @@ class DataPuller{
   private  $threePosts = array(), $groupedPosts = array(), $posts = array(), $statistics, $searchResults ;
 
   // query to get all posts
-  private $qAllPosts = 'SELECT * FROM post ORDER BY Timestamp DESC';
+  private $qAllPosts = 'SELECT * FROM post join user on post.Author = user.id ORDER BY Timestamp DESC';
 
   function __construct() { 
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -12,7 +12,7 @@ class DataPuller{
     // Ignores tags for now
     $result = $database->query($this->qAllPosts);
     while ($row = $result->fetch_assoc()) {
-      $this->posts[] = new Post($row['Title'], $row['Content'], $row['Author'], 
+      $this->posts[] = new Post($row['Title'], $row['Content'], $row['Username'], 
                                    $row['Timestamp'], $row['id']);
     }
 
