@@ -50,11 +50,22 @@ if (isset($_GET['readmore'])) {
 	$readmore = $_GET['readmore'];
 }
 
+$tag = "";
+if (isset($_GET['tags'])) {
+	$readmore = $_GET['tags'];
+}
+
 // Check for search inputs and render search result view
 if (isset($_GET['search'])) {
 	$searchInput = $_GET['search'];
 	$dataBase -> search($searchInput);
 	$loadview = 'searchresults';
+}
+
+// Check if all "create post"-fields are filled, connect to user ID, call storePost
+if ( isset ($_POST['postTitle']) && isset($_POST['postContent']) && isset($_POST['postImage']) ) {
+	$blogPost = new Post($_POST['postTitle'], $_POST['postContent'], $_POST['postImage'], $_SESSION['user']->id);
+	$blogPost->storePost();
 }
 
 // create and render the twig-templates 
