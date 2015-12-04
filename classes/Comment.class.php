@@ -3,7 +3,7 @@
 class Comment{
   private $content, $signature, $date;
 
-  function __construct($content, $signature, $date){
+  function __construct($content, $signature, $date=""){
     $this->content    = $content;
     $this->signature  = $signature;
     $this->date       = $date;
@@ -19,7 +19,7 @@ class Comment{
 
   function storeComment($postID){
     $database = new mysqli('localhost', 'root', '','Phlogger');
-
+echo "sedrtfhyujik";
     // escape the input before upping
     $content    = $database->real_escape_string($this->content);
     $signature  = $database->real_escape_string($this->signature);

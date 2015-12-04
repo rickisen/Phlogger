@@ -68,9 +68,9 @@ if ( isset ($_POST['postTitle']) && isset($_POST['postContent']) && isset($_POST
 	$blogPost->storePost();
 }
 
-if ( isset ($_POST['commentContent']) && isset($_POST['commentSignature'])) {
+if ( isset ($_POST['commentContent']) && isset($_POST['commentSignature']) && isset($_POST['commentParent'])) {
 	$blogComment = new Comment($_POST['commentContent'], $_POST['commentSignature']);
-	$blogComment->storeComment();
+	$blogComment->storeComment($_POST['commentParent']);
 }
 
 // create and render the twig-templates 
