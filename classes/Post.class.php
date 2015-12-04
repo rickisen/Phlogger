@@ -64,13 +64,13 @@ class Post{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     // escape the input before upping
-    $title     = $this->mysqli->real_escape_string($this->title);
-    $content   = $this->mysqli->real_escape_string($this->content);
-    $image     = $this->mysqli->real_escape_string($this->image);
-    $user      = $this->mysqli->real_escape_string($this->user);
+    $title     = $database->real_escape_string($this->title);
+    $content   = $database->real_escape_string($this->content);
+    $image     = $database->real_escape_string($this->image);
+    $user      = $database->real_escape_string($this->user);
 
     $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
-      VALUES ('.$content.', '.$image.','.$user.', '.$title.' )';
+      VALUES (\''.$content.'\', \''.$image.'\',\''.$user.'\', \''.$title.'\' )';
 
     // send the dml query to the db and save the responce
     $responce = $database->query($upQuery);
