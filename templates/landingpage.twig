@@ -14,13 +14,13 @@
     <h4>Browse posts by popular tags: </h4>
 
       {% for tag in dataBase.tags %}
-    <form class="" role="logout" action="" method="get" style="display: inline-block;">
-        <button type="submit" name="readmore" value="{{ tag.id }}" style="background: peachpuff; border: 0px; margin: 2px 1px;"> {{ tag.name }} </button>
+    <form class="tag-form" role="logout" action="" method="get">
+        <button type="submit" name="readmore" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
     </form>
    {% endfor %}
 
   
-    <div class="row" style="margin-top: 15px;">
+    <div class="row more-tags-container">
       <div class="col-xs-12">
     <form class="" role="logout" action="" method="get">
         <button type="submit" class="btn btn-info btn-sm" name="tags" value="tags">Click here to view all tags</button>
@@ -28,11 +28,7 @@
     </div>
     </div>
 
-
   <hr>
-
-
-
 
     <h2>Latest blog posts</h2>
       
