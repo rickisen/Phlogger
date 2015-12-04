@@ -1,6 +1,10 @@
 <div class="container-fluid">
 	<div class="row">
+		{{searchInput}}
 		<div class="col-sm-12">
-				</div>
+			{% for post in dataBase.searchResults %}
+				{% include 'post_summary.twig' %}
+			{% endfor %}
+		</div>
 	</div>
 </div>

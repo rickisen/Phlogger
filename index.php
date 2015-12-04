@@ -25,16 +25,12 @@ if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $
   unset($_SESSION['user']);
 }
 
-// Check for search inputs
-if (isset($_GET['search'])) {
-	$searchInput = $_GET['search'];
-	$dataBase -> search($searchInput);
-}
-
 if (isset($_GET['home']) && $_GET['home'] == 'true') {
 	$loadview = 'landingpage';
 	$readmore = "";
 }
+
+
 
 // Different default pages load depending on if we are loged in
 //
@@ -45,6 +41,7 @@ if ( isset($_SESSION['user']) && $_SESSION['user']->isLoggedIn  ) {
 } else {
   $loadview = 'landingpage';
 }
+
 // But if we get an explicit request we load that instead
 if (isset($_GET['loadview'])) {
 	$loadview = $_GET['loadview'];
@@ -53,6 +50,13 @@ if (isset($_GET['loadview'])) {
 $readmore = "";
 if (isset($_GET['readmore'])) {
 	$readmore = $_GET['readmore'];
+}
+
+// Check for search inputs and render search result view
+if (isset($_GET['search'])) {
+	$searchInput = $_GET['search'];
+	$dataBase -> search($searchInput);
+	$loadview = 'searchresults';
 }
 
 // create and render the twig-templates 
