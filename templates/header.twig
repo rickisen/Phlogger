@@ -9,14 +9,14 @@
         <span class="icon-bar"></span>
       </button>
       <div>
-      <a class="logo" href="#"><b>PH</b>LOGGER</a>
+      <a class="logo" href="http://localhost/phlogger/index.php"><b>PH</b>LOGGER</a>
       </div>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
      
-      <form class="navbar-form navbar-left" role="search">
+      <form method="get" action="" class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control input-sm" placeholder="Search" name="search">
         </div>
@@ -30,7 +30,6 @@
       		<p class="navbar-text navbar-right">Logged in as<strong> {{ user.username }}</strong> <span class="label label-danger">{{ user.rank }}</span></p>
       	{% elseif user and not user.isLoggedIn %}
 
-      	{% elseif not user.isLoggedIn %}
       		<form class="navbar-form navbar-right" role="login" action="" method="post">
 		        <div class="form-group">
 		          <input type="text" class="form-control input-sm" placeholder="username" name="username">

@@ -17,6 +17,11 @@ if (isset($_POST['username']) && isset($_POST['password'])){ //removed "!isset $
   unset($_SESSION['user']);
 }
 
+// Check for search inputs
+if (isset($_GET['search'])) {
+	$searchInput = $_GET['search'];
+}
+
 // Different default pages load depending on if we are loged in
 //
 // What happens if someone manualy puts in a get request for dash?!!
