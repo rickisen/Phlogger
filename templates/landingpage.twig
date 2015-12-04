@@ -11,21 +11,24 @@
       </div>
     {% endif %}
     
-    <h4 style="display:inline-block;">Browse posts by popular tags: </h4><p style="display:inline-block;"> &nbsp; 
+    <h4>Browse posts by popular tags: </h4>
 
-    <form class="" role="logout" action="" method="get">
-        <button type="submit" name="tags" value="tags">Click here to view all tags</button>
-    </form>
-
-
-  <hr>
-  {% for tag in dataBase.tags %}
-    <form class="" role="logout" action="" method="get">
-        <button type="submit" name="readmore" value="{{ tag.id }}"> {{ tag.name }} </button>
+      {% for tag in dataBase.tags %}
+    <form class="tag-form" role="logout" action="" method="get">
+        <button type="submit" name="readmore" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
     </form>
    {% endfor %}
 
+  
+    <div class="row more-tags-container">
+      <div class="col-xs-12">
+    <form class="" role="logout" action="" method="get">
+        <button type="submit" class="btn btn-info btn-sm" name="tags" value="tags">Click here to view all tags</button>
+    </form>
+    </div>
+    </div>
 
+  <hr>
 
     <h2>Latest blog posts</h2>
       

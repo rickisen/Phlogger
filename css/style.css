@@ -44,3 +44,21 @@
 	bottom: 30px;
 	right: 40px;
 }
+
+.tag-form {
+	display: inline-block;
+}
+
+.tag-btn {
+	background: peachpuff; 
+	border: 0px; 
+	margin: 2px 1px;
+}
+
+.tag-btn:hover {
+	background: #FFF;
+}
+
+.more-tags-container {
+	margin-top: 15px;	
+}
