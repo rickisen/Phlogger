@@ -43,4 +43,23 @@ class DataPuller{
     return isset($this->$x);
   }
 
+  function search($searchFor){
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
+    $searchQuery = '
+      SELECT post.id FROM post 
+      WHERE  content LIKE "%'.$searchFor.'%" OR content LIKE "%'.$searchFor.'" 
+          OR content LIKE "'.$searchFor.'%"  OR content LIKE "'.$searchFor.'" 
+          OR title   LIKE "%'.$searchFor.'%" OR title   LIKE "%'.$searchFor.'" 
+          OR title   LIKE "'.$searchFor.'%"  OR title   LIKE "'.$searchFor.'" 
+    ';
+
+    $ret = array();
+    $result = $database->query($searchQuery);
+    while ($row = $result->fetch_assoc()) {
+      $ret[] = new Post($row['Title'], $row['Content'], $row['Author'], $row['Timestamp'], $row['id'] );
+    }
+
+    return $ret;
+  }
 }
