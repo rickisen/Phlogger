@@ -58,6 +58,7 @@ class DataPuller{
           OR content LIKE "'.$searchFor.'%"  OR content LIKE "'.$searchFor.'" 
           OR title   LIKE "%'.$searchFor.'%" OR title   LIKE "%'.$searchFor.'" 
           OR title   LIKE "'.$searchFor.'%"  OR title   LIKE "'.$searchFor.'" 
+      ORDER BY Timestamp DESC 
     ';
 
     if ( $result = $database->query($searchQuery)){
