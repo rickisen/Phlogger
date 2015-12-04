@@ -8,6 +8,7 @@
 				<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 					<h4><b>Title: {{ post.title }} </b><br></h4>
 					<b>Author: Namn Somfan</b>
+					<p>{{ post.timestamp }}</p>
 					<p>{{ post.summary }}</p>
 					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p>
 					<hr>
