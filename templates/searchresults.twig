@@ -7,11 +7,13 @@
 			{% for post in dataBase.searchResults %}
 				<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 					<h4><b>Title: {{ post.title }} </b><br></h4>
-					<b>{{ post.author }}</b>
+					<b>Author:</b><p style="display: inline;"> {{ post.author }}</p>
 					<p>{{ post.timestamp }}</p>
 					<p>{{ post.summary }}</p>
 					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p><br>
-		      		<button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ post.id }}">Read more</button>
+		      		<form class="" role="logout" action="" method="get">
+		      			<button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ post.id }}">Read more</button>
+		      		</form>
 					<hr>
 				</div>
 			{% endfor %}
