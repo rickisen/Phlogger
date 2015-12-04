@@ -3,6 +3,7 @@
 require_once 'classes/UserSession.class.php';
 require_once 'classes/DataPuller.class.php';
 require_once 'classes/Post.class.php';
+require_once 'classes/Tag.class.php';
 require_once 'classes/Comment.class.php';
 require_once 'classes/PagePrinter.class.php';
 require_once 'classes/Statistics.class.php';

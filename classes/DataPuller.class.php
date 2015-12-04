@@ -1,12 +1,21 @@
 <?php
 class DataPuller{
-  private  $threePosts = array(), $groupedPosts = array(), $posts = array(), $statistics, $searchResults ;
+  private  $threePosts = array(), $groupedPosts = array(), $tags = array() ,$posts = array(), $statistics, $searchResults ;
 
   // query to get all posts
   private $qAllPosts = 'SELECT * FROM post join user on post.Author = user.id ORDER BY Timestamp DESC';
 
+  // All tags
+  private $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC';
+
   function __construct() { 
     $database = new mysqli('localhost', 'root', '','Phlogger');
+    
+    // Get all tags
+    $result = $database->query($this->qAllTags);
+    while ($row = $result->fetch_assoc()) {
+      $this->tags[] = new Tag( $row['Name'], $row['id'] );
+    }
 
     // Construct all posts
     // Ignores tags for now
