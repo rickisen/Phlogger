@@ -176,7 +176,7 @@ class DataPuller{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     $searchQuery = '
-      SELECT * FROM post join user on post.Author = user.id
+      SELECT post.*, user.Username FROM post join user on post.Author = user.id
       WHERE  content LIKE "%'.$searchFor.'%" OR content LIKE "%'.$searchFor.'" 
           OR content LIKE "'.$searchFor.'%"  OR content LIKE "'.$searchFor.'" 
           OR title   LIKE "%'.$searchFor.'%" OR title   LIKE "%'.$searchFor.'" 
@@ -188,7 +188,7 @@ class DataPuller{
       $this->posts = array(); // we got a result, so we clear the posts array
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                  $row['Author'], $row['id'],      $row['Timestamp'] );
+                                  $row['Username'], $row['id'],      $row['Timestamp'] );
       }
     } else {
       echo 'Something went wrong with the search: '.$database->error ;
