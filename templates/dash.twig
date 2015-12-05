@@ -1,46 +1,55 @@
 <div class="container-fluid" id="content-container">
+	{% if user.isLoggedIn %}
+		{# Stastics #}
+		<h3>Statistics</h3>
+		<div class="container-fluid" id="stats-container">
+			<div class="row">
+				
+				<div class="col-xs-4" id="stat-holder">
+					<h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span>
+				</div>
 
-	{# Stastics #}
-	<h3>Statistics</h3>
-	<div class="container-fluid" id="stats-container">
-		<div class="row">
-			
-			<div class="col-xs-4" id="stat-holder">
-				<h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span>
+				<div class="col-xs-4" id="stat-holder">
+					<h5>Total posts</h5><span> {{ dataBase.statistics.count_total_posts }} </span>
+				</div>
+
+				<div class="col-xs-4">
+					<h5>Avarage comments</h5><span> {{ dataBase.statistics.avg_comment_post }} </span></div>
+
+				</div>
 			</div>
 
-			<div class="col-xs-4" id="stat-holder">
-				<h5>Total posts</h5><span> {{ dataBase.statistics.count_total_posts }} </span>
-			</div>
-
-			<div class="col-xs-4">
-				<h5>Avarage comments</h5><span> {{ dataBase.statistics.avg_comment_post }} </span></div>
-
-			</div>
+		<div id="popular-posts">
+			<h5>Your three most popular posts:&nbsp;</h5>
+			<p> 
+				{% for top_post in dataBase.statistics.three_most_commented_posts %}
+					{{ top_post }}
+				{% endfor %}
+			</p>
 		</div>
 
-	<div id="popular-posts">
-		<h5>Your three most popular posts:&nbsp;</h5>
-		<p> 
-			{% for top_post in dataBase.statistics.three_most_commented_posts %}
-				{{ top_post }}
-			{% endfor %}
-		</p>
-	</div>
-
-	{# Create new post #}
-	<h3>Create new post</h3>
-	<div class="container-fluid" id="form-container">
-		<div class="row">
-			<form action="" method="post">
-				Title<input type="text" class="form-control" name="postTitle" id="post-title"><br>
-				Text<textarea rows="7"  class="form-control" name="postContent" id="post-content"></textarea><br>
-				Image (Paste your image URL here)
-				<input type="text" class="form-control" name="postImage" id="post-image">
-				<button type="submit" class="btn btn-info" id="post-btn">Post</button>
-			</form>
+		{# Create new post #}
+		<h3>Create new post</h3>
+		<div class="container-fluid" id="form-container">
+			<div class="row">
+				<form action="" method="post">
+					Title<input type="text" class="form-control" name="postTitle" id="post-title"><br>
+					Text<textarea rows="7"  class="form-control" name="postContent" id="post-content"></textarea><br>
+					Image (Paste your image URL here)
+					<input type="text" class="form-control" name="postImage" id="post-image">
+					<button type="submit" class="btn btn-info" id="post-btn">Post</button>
+				</form>
+			</div>
 		</div>
-	</div>
+	{% else %}
+		<div class="container-fluid" id="form-container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Hacking is bad for your health! Don't you know?</h2>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 </div>
 
 
