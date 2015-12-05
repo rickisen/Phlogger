@@ -43,6 +43,7 @@ class Post{
       SELECT *
       FROM comment 
       WHERE comment.post = '.$this->id.'
+      ORDER BY Date ASC
     ';
 
     if( $result = $database->query($qAllComments) ) {
