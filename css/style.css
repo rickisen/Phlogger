@@ -13,7 +13,6 @@
     outline: none;
 }
 
-
 #jumbo {
 	background-image: url(http://thomaskjellberg.se/wp-content/uploads/2015/03/bakgrund2.jpg);
 	background-size: 100%;
@@ -61,4 +60,8 @@
 
 .more-tags-container {
 	margin-top: 15px;	
+}
+
+.navbar-default, .btn, #jumbo, .thumbnail {
+	border-radius: 0px;
 }
