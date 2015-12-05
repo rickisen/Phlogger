@@ -1,24 +1,20 @@
 <div class="row">
   <div class="col-xs-12">
    
-    {% if readmore is not empty %}
-      {% include "post.twig" %}
-    {% else %}
-      <div id="jumbo" class="jumbotron">
-        <h2>Hello, world!</h2>
-        <p>Welcome to proj2_gruppnamns <br> world of Phlogger</p>
-        <p><a class="btn btn-info btn-sm" href="#" role="button">Learn more</a></p>
-      </div>
-    {% endif %}
+    <div id="jumbo" class="jumbotron">
+      <h2>Hello, world!</h2>
+      <p>Welcome to proj2_gruppnamns <br> world of Phlogger</p>
+      <p><a class="btn btn-info btn-sm" href="#" role="button">Learn more</a></p>
+    </div>
     
     <h4>Browse posts by popular tags: </h4>
 
-      {% for tag in dataBase.tags %}
-    <form class="tag-form" action="" method="get">
-	<input  type="hidden" name="loadview" value="post">
-        <button type="submit" name="readmore" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
-    </form>
-   {% endfor %}
+    {% for tag in dataBase.tags %}
+	    <form class="tag-form" action="" method="get">
+		<input  type="hidden" name="loadview" value="post">
+		<button type="submit" name="readmore" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
+	    </form>
+    {% endfor %}
 
   
     <div class="row more-tags-container">
