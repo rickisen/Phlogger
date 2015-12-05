@@ -1,11 +1,8 @@
 <?php 
 class Post{
   private $title, $content, $user, $image, $timestamp, $id, $tags, $comments;
-  private $database;
 
   function __construct($title, $content, $image, $user = 0, $id = 0, $timestamp = "", $tags = array(), $comments = array()){
-    $this->database = new mysqli('localhost', 'root', '','Phlogger');
-
     $this->title      = $title;
     $this->content    = $content;
     $this->image      = $image;
@@ -39,18 +36,21 @@ class Post{
   }
 
   function getComments(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     $qAllComments = '
       SELECT *
       FROM comment 
       WHERE comment.post = '.$this->id.'
     ';
 
-    if( $result = $this->database->query($qAllComments) ) {
+    if( $result = $database->query($qAllComments) ) {
       while ($row = $result->fetch_assoc()) {
         $this->comments[] = new Comment($row['Content'], $row['Signature'], $row['Date'] );
       }
     } else {
-      echo "Error when trying to get a comment: ".$this->database->error;
+      echo "Error when trying to get a comment: ".$database->error;
       return FALSE;
     }
 
@@ -58,28 +58,34 @@ class Post{
   }
 
   function storePost(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     // escape the input before upping
-    $title     = $this->database->real_escape_string($this->title);
-    $content   = $this->database->real_escape_string($this->content);
-    $image     = $this->database->real_escape_string($this->image);
-    $user      = $this->database->real_escape_string($this->user);
+    $title     = $database->real_escape_string($this->title);
+    $content   = $database->real_escape_string($this->content);
+    $image     = $database->real_escape_string($this->image);
+    $user      = $database->real_escape_string($this->user);
 
     $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
       VALUES (\''.$content.'\', \''.$image.'\',\''.$user.'\', \''.$title.'\' )';
 
     // send the dml query to the db and save the response
-    $response = $this->database->query($upQuery);
+    $response = $database->query($upQuery);
 
     // lazy error reporting
     if ($response) {
       return TRUE; // it worked!
     } else {
-      echo "Error when trying to upload a post: ".$this->database->error;
+      echo "Error when trying to upload a post: ".$database->error;
       return FALSE;
     }
   }
 
   function getTags(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     $qAllOurTags = '
       SELECT Tag.*
       FROM Tag LEFT JOIN p_Has_t
@@ -87,12 +93,12 @@ class Post{
       WHERE p_Has_t.postID = '.$this->id.'
     ';
 
-    if( $result = $this->database->query($qAllOurTags) ) {
+    if( $result = $database->query($qAllOurTags) ) {
       while ($row = $result->fetch_assoc()) {
         $this->tags[] = new Tag($row['Name'], $row['id']);
       }
     } else {
-      echo "Error when trying to get a Tag: ".$this->database->error;
+      echo "Error when trying to get a Tag: ".$database->error;
       return FALSE;
     }
 
