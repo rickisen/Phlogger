@@ -11,7 +11,8 @@
 					<p>{{ post.timestamp }}</p>
 					<p>{{ post.summary }}</p>
 					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p><br>
-		      		<form class="" role="logout" action="" method="get">
+		      		<form action="" method="get">
+					<input type="hidden" name="loadview" value="post">
 		      			<button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ post.id }}">Read more</button>
 		      		</form>
 					<hr>
