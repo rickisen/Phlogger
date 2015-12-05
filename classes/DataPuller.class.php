@@ -13,7 +13,7 @@ class DataPuller{
   function __construct() { 
     
     $this->getAllTags();
-    $this->getSinglePost(42);
+    $this->getAllPosts();
     $this->groupPosts();
 
     // Create a statistics object
