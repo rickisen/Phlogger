@@ -6,11 +6,11 @@
 					<h2>{{ dataBase.posts.0.title }}</h2>
 				</div>
 				
-				<div class="col-xs-10 italic">
+				<div class="col-xs-10 italic mrg-btm-15">
 					<b>Posted by</b>: {{ dataBase.posts.0.user }} - datum {{ dataBase.posts.0.timestamp }}
 				</div>
 
-				<div class="col-xs-10 mrg-btm-15">
+				<div class="col-xs-10">
 					<!--$img-->
 					<p>{{ dataBase.posts.0.content }}</p>
 				</div>
@@ -26,10 +26,14 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-10">
+		<div class="col-xs-10 mrg-btm-25">
 			{% for comment in dataBase.posts.0.getComments %}
-				<h4>{{comment.signature}} Commented:</h4>
-				<p>{{comment.content}}</p>
+			<div class="row mrg-btm-10">
+				<div class="col-xs-10">
+					<h4>{{comment.signature}} Commented:</h4>
+					<p>{{comment.content}}</p>
+				</div>
+			</div>
 			{% endfor %}
 			</div>
 		</div>
