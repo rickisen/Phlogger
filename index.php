@@ -74,9 +74,10 @@ if (isset($_GET['search'])) {
         $loadview = 'searchresults';
 }
 
-if (isset($_GET['home']) && $_GET['home'] == 'true') {
-        $loadview = 'landingpage';
-        $readmore = "";
+// Check if someone is trying to submit a post, and if he is logged in, let him.
+if ( isset($_POST['postTitle']) && isset($_POST['postContent']) && isset($_POST['postTags']) && isset($_POST['postImage']) && isset($_SESSION['user']) && $_SESSION['user']->isLoggedIn ) {
+        $blogPost = new Post($_POST['postTitle'], $_POST['postContent'], $_POST['postTags'], $_POST['postImage'], $_SESSION['user']->id); 
+        $blogPost->storePost(); //strings escaped in object
 }
 
 // RENDER THE PAGE ================================================================================
