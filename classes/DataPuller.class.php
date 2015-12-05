@@ -27,8 +27,9 @@ class DataPuller{
 
     if ($monthsBack < 1){
       $qOnePost = ' 
-        SELECT *
-        FROM   post
+        SELECT post.* UCASE(user.Username) AS "Username"
+        FROM   post LEFT JOIN user
+                ON post.Author = user.id
         WHERE  post.Timestamp BETWEEN 
                  DATE_FORMAT(NOW(), "%Y-%m-01 01:01:01") AND 
                  DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s")
@@ -64,9 +65,11 @@ class DataPuller{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     $qPostFromTAg = ' 
-      SELECT DISTINCT post.* 
+      SELECT DISTINCT post.*, UCASE(user.Username) AS "Username"
       FROM   post LEFT JOIN p_Has_t
-             ON p_Has_t.postID = post.id
+               ON p_Has_t.postID = post.id
+             LEFT JOIN user
+               ON post.Author = user.id
       WHERE  p_Has_t.tagID = '.$tagID.'
       ORDER BY post.Timestamp DESC
     ';
@@ -76,7 +79,7 @@ class DataPuller{
       $this->posts = array();
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                  $row['Author'], $row['id'],      $row['Timestamp'] );
+                                  $row['Username'], $row['id'],      $row['Timestamp'] );
       }
     } else {
       echo "Failed to get posts from tag $tagID: ".$database->error;
@@ -89,14 +92,17 @@ class DataPuller{
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
-    $qOnePost = ' SELECT * FROM post WHERE post.id = '.$postID.' LIMIT 1';
+    $qOnePost = ' SELECT post.*, UCASE(user.Username) AS "Username" 
+                  FROM   post join user 
+                    ON   post.Author = user.id 
+                  WHERE  post.id = '.$postID.' LIMIT 1';
 
     // Construct the post
     if( $result = $database->query($qOnePost)){
       $this->posts = array();
       while ($row = $result->fetch_assoc()) { // still loop through in case we get more rows
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                $row['Author'], $row['id'],      $row['Timestamp'] );
+                                  $row['Username'], $row['id'],      $row['Timestamp'] );
       }
     } else {
       echo "Failed to get Post $postID: ".$database->error;
@@ -128,13 +134,17 @@ class DataPuller{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     // query to get all posts
-    $qAllPosts = 'SELECT * FROM post join user on post.Author = user.id ORDER BY Timestamp DESC';
+    $qAllPosts = 'SELECT post.*, UCASE(user.Username) AS Username
+                  FROM post LEFT JOIN user 
+                    ON post.Author = user.id 
+                  ORDER BY Timestamp DESC
+                  ';
 
     // Construct all posts
     if( $result = $database->query($qAllPosts)){
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                  $row['Author'], $row['id'],      $row['Timestamp'] );
+                                  $row['Username'], $row['id'],      $row['Timestamp'] );
       }
     } else {
       echo "Failed to get Posts: ".$database->error;
