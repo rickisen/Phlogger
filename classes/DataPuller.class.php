@@ -24,6 +24,41 @@ class DataPuller{
     $this->statistics = new Statistics();
   }
 
+  // function that returns the posts made this month or x months back in time
+  function getMonthsPosts($monthsBack = 0){
+    if ($monthsBack < 1){
+      $qOnePost = ' 
+        SELECT *
+        FROM   post
+        WHERE  post.Timestamp BETWEEN 
+                 DATE_FORMAT(NOW()) AND 
+                 DATE_FORMAT(LAST_DAY(NOW() - INTERVAL '.$monthsBack.' MONTH), "%Y-%m-%d 23:59:59")
+        ORDER BY post.Timestamp DESC
+      ';
+    } else {
+      $qOnePost = ' 
+        SELECT *
+        FROM   post
+        WHERE  post.Timestamp BETWEEN 
+                 DATE_FORMAT(NOW() - INTERVAL '.$monthsBack.' MONTH, "%Y-%m-01 00:00:00") AND 
+                 DATE_FORMAT(LAST_DAY(NOW() - INTERVAL '.$monthsBack.' MONTH), "%Y-%m-%d 23:59:59")
+        ORDER BY post.Timestamp DESC
+      ';
+    }
+
+    $ret = array();
+    // Construct the posts
+    if( $result = $this->database->query($qOnePost)){
+      while ($row = $result->fetch_assoc()) {
+        $ret[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                          $row['Username'], $row['id'],      $row['Timestamp'] );
+      }
+    } else {
+      echo "Failed to get posts from month $tagID: ".$this->database->error;
+    }
+    return $ret;
+  }
+
   function getPostsFromTag($tagID){
     $qOnePost = ' 
       SELECT post.* 
