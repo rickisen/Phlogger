@@ -49,9 +49,8 @@ if ( isset($_POST['commentContent']) && isset($_POST['commentSignature']) && iss
 }
 
 
-// HANDLE PAGE LOADS ================================================================================
+// HANDLE PAGE LOADS AND VARIABLES ================================================================================
 
-// But if we get an explicit request we load that instead
 if (isset($_GET['loadview'])) {
         $loadview = $_GET['loadview'];
 }
@@ -59,19 +58,14 @@ if (isset($_GET['loadview'])) {
 if (isset($_GET['readmore'])) {
         $readmore = $_GET['readmore'];
         $dataBase->getSinglePost($_GET['readmore']);
-        $loadview = "post";
 }
 
-if (isset($_GET['tags'])) {
-        $dataBase->getPostsFromTag($_GET['tags']);
-        $loadview = 'tagresults';
+if (isset($_GET['tag'])) {
+        $dataBase->getPostsFromTag($_GET['tag']);
 }
 
-// Check for search inputs and redirect to search result view
 if (isset($_GET['search'])) {
-        $searchInput = $_GET['search'];
-        $dataBase -> search($searchInput);
-        $loadview = 'searchresults';
+        $dataBase -> search($_GET['search']);
 }
 
 // RENDER THE PAGE ================================================================================
