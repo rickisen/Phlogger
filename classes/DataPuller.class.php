@@ -1,7 +1,6 @@
 <?php
 class DataPuller{
-  private $threePosts, $groupedPosts, $tags, $posts, $statistics, $searchResults ;
-  private $database ; // where our connection to the database will live
+  private $groupedPosts, $tags, $posts, $statistics ;
 
   function __get($x){
     return $this->$x;
@@ -12,13 +11,10 @@ class DataPuller{
   }
 
   function __construct() { 
-    // Create the connection to our db
-    $this->database = new mysqli('localhost', 'root', '','Phlogger');
     
-    $this->getTags();
-    $this->getAllPosts();
-    $this->getGroupedPosts();
-    $this->getThreePosts();
+    $this->getAllTags();
+    $this->getSinglePost(42);
+    $this->groupPosts();
 
     // Create a statistics object
     $this->statistics = new Statistics();
@@ -26,13 +22,16 @@ class DataPuller{
 
   // function that returns the posts made this month or x months back in time
   function getMonthsPosts($monthsBack = 0){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     if ($monthsBack < 1){
       $qOnePost = ' 
         SELECT *
         FROM   post
         WHERE  post.Timestamp BETWEEN 
-                 DATE_FORMAT(NOW()) AND 
-                 DATE_FORMAT(LAST_DAY(NOW() - INTERVAL '.$monthsBack.' MONTH), "%Y-%m-%d 23:59:59")
+                 DATE_FORMAT(NOW(), "%Y-%m-01 01:01:01") AND 
+                 DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s")
         ORDER BY post.Timestamp DESC
       ';
     } else {
@@ -46,83 +45,105 @@ class DataPuller{
       ';
     }
 
-    $ret = array();
+    $this->posts = array();
     // Construct the posts
-    if( $result = $this->database->query($qOnePost)){
+    if( $result = $database->query($qOnePost)){
       while ($row = $result->fetch_assoc()) {
-        $ret[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                          $row['Username'], $row['id'],      $row['Timestamp'] );
+        $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                  $row['Author'], $row['id'],      $row['Timestamp'] );
       }
     } else {
-      echo "Failed to get posts from month $tagID: ".$this->database->error;
+      echo "Failed to get posts from month $monthsBack: ".$database->error;
+      return FALSE ;
     }
-    return $ret;
+    return TRUE;
   }
 
   function getPostsFromTag($tagID){
-    $qOnePost = ' 
-      SELECT post.* 
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
+    $qPostFromTAg = ' 
+      SELECT DISTINCT post.* 
       FROM   post LEFT JOIN p_Has_t
-        ON   p_Has_t.tagID = '.$tagID.'
+             ON p_Has_t.postID = post.id
+      WHERE  p_Has_t.tagID = '.$tagID.'
       ORDER BY post.Timestamp DESC
     ';
-    $ret = array();
-    // Construct the posts
-    if( $result = $this->database->query($qOnePost)){
+
+    // Get the relevant posts from db and construct them
+    if( $result = $database->query($qPostFromTAg)){
+      $this->posts = array();
       while ($row = $result->fetch_assoc()) {
-        $ret[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                        $row['Username'], $row['id'],      $row['Timestamp'] );
+        $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                  $row['Author'], $row['id'],      $row['Timestamp'] );
       }
     } else {
-      echo "Failed to get posts from tag $tagID: ".$this->database->error;
+      echo "Failed to get posts from tag $tagID: ".$database->error;
+      return FALSE;
     }
-    return $ret;
+    return TRUE;
   }
 
-  function getPost($postID){
+  function getSinglePost($postID){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     $qOnePost = ' SELECT * FROM post WHERE post.id = '.$postID.' LIMIT 1';
 
-    // Construct all posts
-    if( $result = $this->database->query($qOnePost)){
-      while ($row = $result->fetch_assoc()) {
-        $ret = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                        $row['Username'], $row['id'],      $row['Timestamp'] );
+    // Construct the post
+    if( $result = $database->query($qOnePost)){
+      $this->posts = array();
+      while ($row = $result->fetch_assoc()) { // still loop through in case we get more rows
+        $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                $row['Author'], $row['id'],      $row['Timestamp'] );
       }
     } else {
-      echo "Failed to get Post $postID: ".$this->database->error;
+      echo "Failed to get Post $postID: ".$database->error;
+      return FALSE;
     }
-    return $ret;
+    return TRUE;
   }
 
   function getAllTags(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC';
 
     // Get all tags
-    if( $result = $this->database->query($qAllTags)){
+    if( $result = $database->query($qAllTags)){
       while ($row = $result->fetch_assoc()) {
         $this->tags[] = new Tag( $row['Name'], $row['id'] );
       }
     } else {
-      echo "Failed to get Tags: ".$this->database->error;
+      echo "Failed to get Tags: ".$database->error;
+      return FALSE;
     }
+    return TRUE;
   }
 
   function getAllPosts(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     // query to get all posts
     $qAllPosts = 'SELECT * FROM post join user on post.Author = user.id ORDER BY Timestamp DESC';
 
     // Construct all posts
-    if( $result = $this->database->query($qAllPosts)){
+    if( $result = $database->query($qAllPosts)){
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                  $row['Username'], $row['id'],      $row['Timestamp'] );
+                                  $row['Author'], $row['id'],      $row['Timestamp'] );
       }
     } else {
-      echo "Failed to get Posts: ".$this->database->error;
+      echo "Failed to get Posts: ".$database->error;
+      return FALSE;
     }
+    return TRUE;
   }
 
-  function getGroupedPosts(){
+  function groupPosts(){
     // Divide the posts into groups of 12, so that 
     // we don't fill the landingpage
     $limit = 12 ;
@@ -137,19 +158,13 @@ class DataPuller{
         $this->groupedPosts[$group][] = $post;
       }
     }
-    return $this->groupedPosts;
-  }
-
-  function getThreePosts(){
-    // put the 3 latest posts into an easily obtainable array
-    $i = 0;
-    while ($i < 3){
-      $this->threePosts[] = $this->posts[$i++];
-    }
-    return $this->threePosts;
+    return isset($this->groupedPosts[0][0]);
   }
 
   function search($searchFor){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
     $searchQuery = '
       SELECT * FROM post join user on post.Author = user.id
       WHERE  content LIKE "%'.$searchFor.'%" OR content LIKE "%'.$searchFor.'" 
@@ -159,13 +174,14 @@ class DataPuller{
       ORDER BY Timestamp DESC 
     ';
 
-    if ( $result = $this->database->query($searchQuery)){
+    if ( $result = $database->query($searchQuery)){
+      $this->posts = array(); // we got a result, so we clear the posts array
       while ($row = $result->fetch_assoc()) {
-        $this->searchResults[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                          $row['Username'], $row['id'],      $row['Timestamp'] );
+        $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                  $row['Author'], $row['id'],      $row['Timestamp'] );
       }
     } else {
-      echo 'Something went wrong with the search: '.$this->database->error ;
+      echo 'Something went wrong with the search: '.$database->error ;
       return FALSE;
     }
     return TRUE;
