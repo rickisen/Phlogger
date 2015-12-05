@@ -1,3 +1,7 @@
+#post-container, #comment-container {
+	margin: 0 auto;
+}
+
 .mrg-btm-15{
 	margin-bottom: 15px;
 }
