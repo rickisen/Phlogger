@@ -58,7 +58,7 @@ class Post{
     return $this->comments;
   }
 
-  function storePost(){
+  function storePost($dirtyUser){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
@@ -66,7 +66,7 @@ class Post{
     $title     = $database->real_escape_string($this->title);
     $content   = $database->real_escape_string($this->content);
     $image     = $database->real_escape_string($this->image);
-    $user      = $database->real_escape_string($this->user);
+    $user      = $database->real_escape_string($dirtyUser);
 
     $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
       VALUES (\''.$content.'\', \''.$image.'\',\''.$user.'\', \''.$title.'\' )';
