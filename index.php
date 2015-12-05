@@ -59,7 +59,7 @@ if (isset($_GET['loadview'])) {
 if (isset($_GET['readmore'])) {
         $readmore = $_GET['readmore'];
         $dataBase->getSinglePost($_GET['readmore']);
-        $loadview = 'post';
+        $loadview = "post";
 }
 
 if (isset($_GET['tags'])) {
