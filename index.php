@@ -46,6 +46,7 @@ if ( isset($_POST['commentContent']) && isset($_POST['commentSignature']) && iss
 if (isset($_GET['loadview'])) {
         $loadview = $_GET['loadview'];
 } 
+
 if (isset($_POST['loadview'])){
         $loadview = $_POST['loadview'];
 }

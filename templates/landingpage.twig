@@ -11,8 +11,8 @@
 
     {% for tag in dataBase.tags %}
 	    <form class="tag-form" action="" method="get">
-		<input  type="hidden" name="loadview" value="post">
-		<button type="submit" name="readmore" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
+		<input  type="hidden" name="loadview" value="tagresults">
+		<button type="submit" name="tag" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
 	    </form>
     {% endfor %}
 
