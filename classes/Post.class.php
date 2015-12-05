@@ -20,12 +20,8 @@ class Post{
   }
 
   function __isset($name) {
-    if (isset($this->$name)){
-        return true;
-      } else {
-        return false;
-      }
-    }
+    return isset($this->$name);
+  }
 
   // goes through all the characters in 
   // the content and returns a maximum of 150 characters
@@ -59,10 +55,6 @@ class Post{
     }
 
     return $this->comments;
-  }
-
-  function getPost($postID){
-
   }
 
   function storePost(){
