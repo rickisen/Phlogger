@@ -21,17 +21,10 @@ if (isset($_POST['username']) && isset($_POST['password'])){
         $_SESSION['user'] = new UserSession($_POST['username'], $_POST['password']);  // strings escaped in the user class constructor
 } 
 
+
 // Remove a UserSession if the user tried to log in with bad credentials, or if we got a logout request
 if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn || isset($_POST['logout'])) {
         unset($_SESSION['user']);
-}
-
-// Different default pages load depending on if we are loged in
-//
-if ( isset($_SESSION['user']) && $_SESSION['user']->isLoggedIn  ) {
-        $loadview = 'dash';
-} else {
-        $loadview = 'landingpage';
 }
 
 // HANDLE POST REQUESTS ================================================================================
@@ -48,11 +41,13 @@ if ( isset($_POST['commentContent']) && isset($_POST['commentSignature']) && iss
         $newComment->storeComment($_POST['commentParent']);
 }
 
-
 // HANDLE PAGE LOADS AND VARIABLES ================================================================================
 
 if (isset($_GET['loadview'])) {
         $loadview = $_GET['loadview'];
+} 
+if (isset($_POST['loadview'])){
+        $loadview = $_POST['loadview'];
 }
 
 if (isset($_GET['readmore'])) {
@@ -70,6 +65,7 @@ if (isset($_GET['search'])) {
 
 // RENDER THE PAGE ================================================================================
 if (!isset($readmore)) $readmore = 0 ;
-$page = new PagePrinter(['dataBase' => $dataBase, 'loadview' => $loadview, 'readmore' => $readmore ]);
+if (!isset($loadview)) $loadview = "landingpage" ;
+$page = new PagePrinter(['dataBase' => $dataBase, 'user' => $_SESSION['user'], 'loadview' => $loadview, 'readmore' => $readmore ]);
 
 echo $page->render();
