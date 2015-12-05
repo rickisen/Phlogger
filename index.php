@@ -79,6 +79,8 @@ if (isset($_GET['home']) && $_GET['home'] == 'true') {
         $readmore = "";
 }
 
+// RENDER THE PAGE ================================================================================
+
 // Create and render the twig-templates 
 if (isset($_SESSION['user'])){
         $page = new PagePrinter(['user' => $_SESSION['user'], 'dataBase' => $dataBase, 'loadview' => $loadview]);
