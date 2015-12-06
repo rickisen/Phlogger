@@ -9,7 +9,7 @@ class Post{
     $this->user       = $user;
     $this->id         = $id;
     $this->timestamp  = $timestamp;
-    $this->tags       = $tags;
+    $this->downloadTags();
   }
 
   function __get($name){
@@ -83,13 +83,13 @@ class Post{
     }
 
     // connect the tags to our post in the database
-    foreach ($tags as $tag){
+    foreach ($this->tags as $tag){
       $tag->connectTag($this->id);
     }
 
   }
 
-  function getTags(){
+  function downloadTags(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
