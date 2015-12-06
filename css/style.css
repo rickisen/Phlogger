@@ -22,7 +22,6 @@
 
 .thumbnail {
 	height: 485px;
-	overflow: scroll;
 }
 
 .thumbnail img {
@@ -65,4 +64,8 @@
 
 .navbar-default, .btn, #jumbo, .thumbnail {
 	border-radius: 0px;
+}
+
+.scroll {
+	overflow: scroll;
 }
