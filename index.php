@@ -68,7 +68,8 @@ if (isset($_GET['search'])) {
 if (!isset($readmore)) $readmore = 0 ;
 if (!isset($loadview)) $loadview = "landingpage" ;
 // if someone tries to log in with bad creds, redirect them to the landingpage
-if ($loadview == 'dash' && !isset($_SESSION['user'])){ $loadview == 'landingpage'; }
+if ($loadview == 'dash' && !isset($_SESSION['user'])){ $loadview = 'landingpage'; }
+if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn){ $loadview = 'landingpage'; }
 
 if ($loadview == 'landingpage'){
   $dataBase->getTwelPosts();
