@@ -1,22 +1,25 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<h2>Posts related to tag!</h2>
+
+			<h2>Posts related to {{dataBase.activeTag.name}}</h2>
 	 		<p>Amount of posts related to your search: {{ dataBase.posts|length }}</p>
+			
 			{% for post in dataBase.posts %}
 			<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 				<h4><b>Title: {{ post.title }} </b></h4><br>
 				<b>Author:</b><p style="display: inline;"> {{ post.author }}</p>
 				<p>{{ post.timestamp }}</p>
 				<p>{{ post.summary }}</p>
-				<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p><br>
-	      		<form class="" role="" action="" method="get">
+				<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p> <br>
+	      		<form method="get">
 	      			<input type="hidden" name="loadview" value="post">
 	      			<button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ post.id }}">Read more</button>
 	      		</form>
 				<hr>
 			</div>
 			{% endfor %}
+
 		</div>
 	</div>
 </div>
