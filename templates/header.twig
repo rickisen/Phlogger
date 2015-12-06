@@ -14,11 +14,10 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
       <form method="get" action="" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-	  <input type="hidden" name="loadview" value="searchresults">
+	        <input type="hidden" name="loadview" value="searchresults">
           <input type="text" class="form-control input-sm" placeholder="Search" name="search">
         </div>
         <button type="submit" class="btn btn-info btn-sm">Submit</button>
@@ -26,6 +25,7 @@
       
 	{% if user.isLoggedIn %}
 		<form class="navbar-form navbar-right" role="logout" action="" method="post">
+      <input type="hidden" name="loadview" value="landingpage">
 			<button type="submit" class="btn btn-info btn-sm" name="logout" value="true">Logout</button>
 		</form>
 		<p class="navbar-text navbar-right">Logged in as <a href="index.php?loadview=dash" ><strong> {{ user.username }}</strong></a> <span class="label label-danger">{{ user.rank }}</span></p>
