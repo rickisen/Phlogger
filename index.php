@@ -21,7 +21,6 @@ if (isset($_POST['username']) && isset($_POST['password'])){
         $_SESSION['user'] = new UserSession($_POST['username'], $_POST['password']);  // strings escaped in the user class constructor
 } 
 
-
 // Remove a UserSession if the user tried to log in with bad credentials, or if we got a logout request
 if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn || isset($_POST['logout'])) {
         unset($_SESSION['user']);

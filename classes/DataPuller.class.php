@@ -11,7 +11,6 @@ class DataPuller{
   }
 
   function __construct() { 
-    
     $this->getAllTags();
     $this->getAllPosts();
     $this->groupPosts();
@@ -111,6 +110,7 @@ class DataPuller{
       echo "Failed to get Post $postID: ".$database->error;
       return FALSE;
     }
+    $this->posts[0]->getTags();// make sure the tags are displayable
     return TRUE;
   }
 

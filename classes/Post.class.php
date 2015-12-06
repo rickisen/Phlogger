@@ -9,7 +9,6 @@ class Post{
     $this->user       = $user;
     $this->id         = $id;
     $this->timestamp  = $timestamp;
-    $this->downloadTags();
   }
 
   function __get($name){
@@ -89,7 +88,7 @@ class Post{
     }
   }
 
-  function downloadTags(){
+  function getTags(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
@@ -108,7 +107,6 @@ class Post{
       echo "Error when trying to get a Tag: ".$database->error;
       return FALSE;
     }
-
     return $this->tags;
   }
 
