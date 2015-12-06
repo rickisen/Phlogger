@@ -9,7 +9,12 @@ class Post{
     $this->user       = $user;
     $this->id         = $id;
     $this->timestamp  = $timestamp;
-    $this->tags       = $tags;
+    // check if the tags supplied is already an array of tags,
+    // or if it needs to be exploded/constructed first
+    if (is_array($tags))
+      $this->tags       = $tags;
+    else 
+      $this->tags       = $this->tagsFromString($tags);
   }
 
   function __get($name){
@@ -103,6 +108,45 @@ class Post{
       return FALSE;
     }
 
+    return $this->tags;
+  }
+
+  function tagsFromString($tagString){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
+    // explode the input string into an array 
+    // and loop through it and trim surrounding spaces 
+    // and escape hostile input
+    $tagNames = explode(',', $tagString);
+    foreach ( $tagNames as $key => $tagName ){
+      $tagNames[$key] = $database->real_escape_string(trim($tagName));
+    } 
+
+    // see if we already have a tag in the database with the same name
+    // and if so get that tag into our return array, and remove it 
+    // from out tagnames list
+    $ret = array();
+    foreach ( $tagNames as $key => $tagName ){
+      $qTagIdByName = ' SELECT Tag.* FROM Tag WHERE Tag.Name = '.$tagName.' ';
+
+      if($result = $database->query($qTagIdByName) ) {
+        if ( $row  = $result->fetch_assoc()) {
+          $ret[] = new Tag($row['Name'], $row['id']); 
+        } else {
+          // upload tag
+          $database->query('INSERT INTO Tag (Name) VALUES('.$tagName.')');
+
+          // get the Tag, (and its newly created id)
+          $result = $database->query($qTagIdByName);
+          if ($row  = $result->fetch_assoc()) {
+            $newTag = new Tag($row['Name'], $row['id']); 
+          } else {
+            echo 'Error when trying to get a newly made tag'.$database->error;
+          }
+        }
+      } 
+    }
     return $this->tags;
   }
 }
