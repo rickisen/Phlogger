@@ -32,6 +32,7 @@ if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn || isset($_POST['
 // Check if someone is trying to submit a post, and if he is logged in, let him.
 if ( isset($_POST['postTitle']) && isset($_POST['postContent']) && isset($_POST['postImage']) && isset($_SESSION['user']) && $_SESSION['user']->isLoggedIn ) {
         $blogPost = new Post($_POST['postTitle'], $_POST['postContent'], $_POST['postImage'], $_SESSION['user']->id); 
+        $blogPost->SetTagsFromString($_POST['postTags']);
         $blogPost->storePost($_SESSION['user']->id); //strings escaped in object
 }
 
