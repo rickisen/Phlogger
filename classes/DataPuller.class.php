@@ -1,6 +1,6 @@
 <?php
 class DataPuller{
-  private $groupedPosts, $activeTag, $tags, $posts, $statistics ;
+  private $groupedPosts, $activeTag, $tags, $posts, $statistics, $searchInput = ""; 
 
   function __get($x){
     return $this->$x;
@@ -197,6 +197,7 @@ class DataPuller{
       echo 'Something went wrong with the search: '.$database->error ;
       return FALSE;
     }
+    $this->searchInput = $searchFor;
     return TRUE;
   }
 }
