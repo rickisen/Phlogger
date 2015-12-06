@@ -62,7 +62,7 @@ if (isset($_GET['tag'])) {
 }
 
 if (isset($_GET['search'])) {
-        $dataBase -> search($_GET['search']);
+        $dataBase->search($_GET['search']);
 }
 
 // RENDER THE PAGE ================================================================================

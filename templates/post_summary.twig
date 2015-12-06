@@ -6,11 +6,10 @@
         <p class="commentamount"><b>Comments:</b> {{ post.getComments|length }} </p>
         <p>Posted by: <b>{{post.user}}</b> <br>
         <i>{{ post.timestamp }}</i></p>
-         <form class="" role="logout" action="" method="get">
-		 <input type="hidden" name="loadview" value="post">
+        <form class="" role="logout" action="" method="get">
+		      <input type="hidden" name="loadview" value="post">
       		<button type="submit" class="btn btn-info btn-sm" name="readmore" value="{{ post.id }}">Read more</button>
       	</form>
-      	
       </div>
     </div>
   </div>

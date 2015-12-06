@@ -2,12 +2,12 @@
 	<div class="row">
 {# 		{{ searchInput }}
  #}		<div class="col-sm-12">
- 		<h2>Search results for: {{ dataBase.searchInput }}</h2>
+ 		<h2>Search results for: {{ dataBase.searchFor }}</h2>
  		<p>Amount of posts related to your search: {{ dataBase.posts|length }}</p>
 			{% for post in dataBase.posts %}
 				<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 					<h4><b>Title: {{ post.title }} </b><br></h4>
-					<b>Author:</b><p style="display: inline;"> {{ post.author }}</p>
+					<b>Author:</b><p style="display: inline;"> {{ post.user }}</p>
 					<p>{{ post.timestamp }}</p>
 					<p>{{ post.summary }}</p>
 					<p style="display: inline-block">Amount of comments: {{ post.getComments|length }}</p><br>
