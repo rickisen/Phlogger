@@ -1,4 +1,5 @@
 <div class="container-fluid">
+
 	<div class="row" id="post-container">
 		<div class="col-xs-12">
 			<div class="row">
@@ -18,6 +19,18 @@
 		</div>
 	</div>
 
+	<div class="row" id="tags-container">
+		<div class="col-xs-10">
+			<h4>Post tags</h4>
+			{% for tag in dataBase.posts.0.tags %}
+				<form class="tag-form" action="" method="get">
+		    		<input  type="hidden" name="loadview" value="tagresults">
+		    		<button type="submit" name="tag" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
+	    		</form>
+			{% endfor %}
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-xs-10">
 			{% include 'comment.twig' %}
@@ -27,20 +40,17 @@
 	<div class="row" id="comment-container">
 		<div class="col-xs-10 mrg-btm-25">
 			{% for comment in dataBase.posts.0.getComments %}
-			<div class="row mrg-btm-10">
-				<div class="col-xs-10" >
-					<h4>{{comment.signature}} Commented:</h4>
-					<p>{{comment.content}}</p>
-					<p>{{comment.date}}</p>
-					<hr>
+				<div class="row mrg-btm-10">
+					<div class="col-xs-10" >
+						<h4>{{comment.signature}} Commented:</h4>
+						<p>{{comment.content}}</p>
+						<p>{{comment.date}}</p>
+						<hr>
+					</div>
 				</div>
-			</div>
 			{% endfor %}
-			<h4>Post connected to tags:</h4>
-			{% for tag in dataBase.posts.0.tags %}
-				<p> {{ tag.name }} </p>
-			{% endfor %}
-			</div>
 		</div>
 	</div>
+
+</div>
 
