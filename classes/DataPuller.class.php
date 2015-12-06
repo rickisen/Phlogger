@@ -1,6 +1,6 @@
 <?php
 class DataPuller{
-  private $groupedPosts, $tags, $posts, $statistics ;
+  private $groupedPosts, $activeTag, $tags, $posts, $statistics ;
 
   function __get($x){
     return $this->$x;
@@ -65,11 +65,13 @@ class DataPuller{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     $qPostFromTAg = ' 
-      SELECT DISTINCT post.*, UCASE(user.Username) AS "Username"
+      SELECT DISTINCT post.*, UCASE(user.Username) AS "Username", Tag.Name AS "TagName" 
       FROM   post LEFT JOIN p_Has_t
                ON p_Has_t.postID = post.id
              LEFT JOIN user
                ON post.Author = user.id
+             LEFT JOIN Tag
+               ON Tag.id = '.$tagID.'
       WHERE  p_Has_t.tagID = '.$tagID.'
       ORDER BY post.Timestamp DESC
     ';
@@ -78,8 +80,9 @@ class DataPuller{
     if( $result = $database->query($qPostFromTAg)){
       $this->posts = array();
       while ($row = $result->fetch_assoc()) {
-        $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                  $row['Username'], $row['id'],      $row['Timestamp'] );
+        $this->posts[]   = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                    $row['Username'], $row['id'],      $row['Timestamp'] );
+        $this->activeTag = new Tag( $row['TagName'], $tagID);
       }
     } else {
       echo "Failed to get posts from tag $tagID: ".$database->error;
