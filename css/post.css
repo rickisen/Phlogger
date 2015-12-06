@@ -1,9 +1,5 @@
-#post-container, #comment-container {
+#post-container, #comment-container, #tags-container {
 	margin: 0 auto;
-}
-
-.scroll {
-	overflow: scroll;
 }
 
 .mrg-btm-15{
