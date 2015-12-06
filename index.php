@@ -67,6 +67,10 @@ if (isset($_GET['search'])) {
 // RENDER THE PAGE ================================================================================
 if (!isset($readmore)) $readmore = 0 ;
 if (!isset($loadview)) $loadview = "landingpage" ;
-$page = new PagePrinter(['dataBase' => $dataBase, 'user' => $_SESSION['user'], 'loadview' => $loadview, 'readmore' => $readmore ]);
+if (!isset($_SESSION['user'])) {
+  $page = new PagePrinter(['dataBase' => $dataBase, 'loadview' => $loadview, 'readmore' => $readmore ]);
+} else {
+  $page = new PagePrinter(['dataBase' => $dataBase, 'user' => $_SESSION['user'], 'loadview' => $loadview, 'readmore' => $readmore ]);
+}
 
 echo $page->render();
