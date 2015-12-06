@@ -71,8 +71,14 @@ class Post{
     $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
       VALUES (\''.$content.'\', \''.$image.'\',\''.$user.'\', \''.$title.'\' )';
 
-    // send the dml query to the db and save the response
+    // send the dml query to the db, save the response, and the newly generated id
     $response = $database->query($upQuery);
+    $this->id = $database->insert_id;
+
+    // connect the tags to our post in the database
+    foreach ($this->tags as $tag){
+      $tag->connectTag($this->id);
+    }
 
     // lazy error reporting
     if ($response) {
@@ -81,12 +87,6 @@ class Post{
       echo "Error when trying to upload a post: ".$database->error;
       return FALSE;
     }
-
-    // connect the tags to our post in the database
-    foreach ($this->tags as $tag){
-      $tag->connectTag($this->id);
-    }
-
   }
 
   function downloadTags(){
