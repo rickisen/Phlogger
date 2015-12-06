@@ -65,3 +65,7 @@
 .navbar-default, .btn, #jumbo, .thumbnail {
 	border-radius: 0px;
 }
+
+.scroll {
+	overflow: scroll;
+}
