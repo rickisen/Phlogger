@@ -9,12 +9,7 @@ class Post{
     $this->user       = $user;
     $this->id         = $id;
     $this->timestamp  = $timestamp;
-    // check if the tags supplied is already an array of tags,
-    // or if it needs to be exploded/constructed first
-    if (is_array($tags))
-      $this->tags       = $tags;
-    else 
-      $this->tags       = $this->tagsFromString($tags);
+    $this->tags       = $tags;
   }
 
   function __get($name){
@@ -151,7 +146,7 @@ class Post{
             echo 'Error when trying to get a newly made tag'.$database->error;
           }
         }
-      } 
+      }
     }
   }
 }
