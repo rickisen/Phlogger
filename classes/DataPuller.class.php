@@ -11,10 +11,6 @@ class DataPuller{
   }
 
   function __construct() { 
-    $this->getAllTags();
-    $this->getAllPosts();
-    $this->groupPosts();
-
     // Create a statistics object
     $this->statistics = new Statistics();
   }
@@ -25,8 +21,8 @@ class DataPuller{
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
     if ($monthsBack < 1){
-      $qOnePost = ' 
-        SELECT post.* UCASE(user.Username) AS "Username"
+      $qMonthPosts = ' 
+        SELECT post.*, UCASE(user.Username) AS "Username"
         FROM   post LEFT JOIN user
                 ON post.Author = user.id
         WHERE  post.Timestamp BETWEEN 
@@ -35,9 +31,10 @@ class DataPuller{
         ORDER BY post.Timestamp DESC
       ';
     } else {
-      $qOnePost = ' 
-        SELECT post.* UCASE(user.Username) AS "Username"
-        FROM   post
+      $qMonthPosts = ' 
+        SELECT post.*, UCASE(user.Username) AS "Username"
+        FROM   post LEFT JOIN user
+                ON post.Author = user.id
         WHERE  post.Timestamp BETWEEN 
                  DATE_FORMAT(NOW() - INTERVAL '.$monthsBack.' MONTH, "%Y-%m-01 00:00:00") AND 
                  DATE_FORMAT(LAST_DAY(NOW() - INTERVAL '.$monthsBack.' MONTH), "%Y-%m-%d 23:59:59")
@@ -47,7 +44,7 @@ class DataPuller{
 
     $this->posts = array();
     // Construct the posts
-    if( $result = $database->query($qOnePost)){
+    if( $result = $database->query($qMonthPosts)){
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
                                   $row['Username'], $row['id'],      $row['Timestamp'] );
@@ -114,11 +111,11 @@ class DataPuller{
     return TRUE;
   }
 
-  function getAllTags(){
+  function getLandingpageTags(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
-    $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC';
+    $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC LIMIT 20';
 
     // Get all tags
     if( $result = $database->query($qAllTags)){
@@ -127,6 +124,32 @@ class DataPuller{
       }
     } else {
       echo "Failed to get Tags: ".$database->error;
+      return FALSE;
+    }
+    return TRUE;
+  }
+
+  function getTwelPosts(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
+    // query to get the 12 latest posts
+    $qTwelePosts = ' 
+                  SELECT post.*, UCASE(user.Username) AS Username
+                  FROM post LEFT JOIN user 
+                    ON post.Author = user.id 
+                  ORDER BY Timestamp DESC
+                  LIMIT 12
+                  ';
+
+    // Construct all posts
+    if( $result = $database->query($qTwelePosts)){
+      while ($row = $result->fetch_assoc()) {
+        $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
+                                  $row['Username'], $row['id'],      $row['Timestamp'] );
+      }
+    } else {
+      echo "Failed to get Posts: ".$database->error;
       return FALSE;
     }
     return TRUE;
