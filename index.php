@@ -21,8 +21,8 @@ if (isset($_POST['username']) && isset($_POST['password'])){
         $_SESSION['user'] = new UserSession($_POST['username'], $_POST['password']);  // strings escaped in the user class constructor
 } 
 
-// Remove a UserSession if the user tried to log in with bad credentials, or if we got a logout request
-if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn || isset($_POST['logout'])) {
+// Remove a UserSession if the user if we got a logout request
+if ( isset($_POST['logout'])) {
         unset($_SESSION['user']);
 }
 
@@ -64,19 +64,22 @@ if (isset($_GET['search'])) {
         $dataBase->search($_GET['search']);
 }
 
-// RENDER THE PAGE ================================================================================
+// RENDER THE PAGE AND READY THE DATA =============================================================
 if (!isset($readmore)) $readmore = 0 ;
 if (!isset($loadview)) $loadview = "landingpage" ;
+// if someone tries to log in with bad creds, redirect them to the landingpage
+if ($loadview == 'dash' && !isset($_SESSION['user'])){ $loadview == 'landingpage'; }
+
 if ($loadview == 'landingpage'){
   $dataBase->getTwelPosts();
   $dataBase->groupPosts();
   $dataBase->getLandingpageTags();
 }
 
-if (!isset($_SESSION['user'])) {
-  $page = new PagePrinter(['dataBase' => $dataBase, 'loadview' => $loadview, 'readmore' => $readmore ]);
-} else {
+if (isset($_SESSION['user'])) {
   $page = new PagePrinter(['dataBase' => $dataBase, 'user' => $_SESSION['user'], 'loadview' => $loadview, 'readmore' => $readmore ]);
+} else {
+  $page = new PagePrinter(['dataBase' => $dataBase, 'loadview' => $loadview, 'readmore' => $readmore ]);
 }
 
 echo $page->render();
