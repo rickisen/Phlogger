@@ -37,7 +37,7 @@ class DataPuller{
       ';
     } else {
       $qOnePost = ' 
-        SELECT *
+        SELECT post.* UCASE(user.Username) AS "Username"
         FROM   post
         WHERE  post.Timestamp BETWEEN 
                  DATE_FORMAT(NOW() - INTERVAL '.$monthsBack.' MONTH, "%Y-%m-01 00:00:00") AND 
@@ -51,7 +51,7 @@ class DataPuller{
     if( $result = $database->query($qOnePost)){
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
-                                  $row['Author'], $row['id'],      $row['Timestamp'] );
+                                  $row['Username'], $row['id'],      $row['Timestamp'] );
       }
     } else {
       echo "Failed to get posts from month $monthsBack: ".$database->error;
