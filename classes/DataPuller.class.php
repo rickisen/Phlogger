@@ -1,6 +1,6 @@
 <?php
 class DataPuller{
-  private $groupedPosts, $activeTag, $tags, $posts, $statistics, $searchInput = ""; 
+  private $groupedPosts, $activeTag, $tags, $posts, $statistics, $searchInput = "", $alltags = FALSE; 
 
   function __get($x){
     return $this->$x;
@@ -111,11 +111,11 @@ class DataPuller{
     return TRUE;
   }
 
-  function getLandingpageTags(){
+  function getAllTags(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
-    $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC LIMIT 20';
+    $qAllTags = 'SELECT * FROM Tag ORDER BY id DESC ';
 
     // Get all tags
     if( $result = $database->query($qAllTags)){
@@ -126,6 +126,26 @@ class DataPuller{
       echo "Failed to get Tags: ".$database->error;
       return FALSE;
     }
+    $this->alltags = TRUE;
+    return TRUE;
+  }
+
+  function getLimitedTags(){
+    // Create the connection to our db
+    $database = new mysqli('localhost', 'root', '','Phlogger');
+
+    $qLTags = 'SELECT * FROM Tag ORDER BY id DESC LIMIT 20';
+
+    // Get all tags
+    if( $result = $database->query($qLTags)){
+      while ($row = $result->fetch_assoc()) {
+        $this->tags[] = new Tag( $row['Name'], $row['id'] );
+      }
+    } else {
+      echo "Failed to get Tags: ".$database->error;
+      return FALSE;
+    }
+    $this->alltags = FALSE;
     return TRUE;
   }
 

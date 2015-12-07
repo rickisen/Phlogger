@@ -1,0 +1,16 @@
+<h4>Browse posts by most recent tags: </h4>
+
+{% for tag in dataBase.tags %}
+<form class="tag-form" action="" method="get">
+    <input  type="hidden" name="loadview" value="tagresults">
+    <button type="submit" name="tag" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
+</form>
+{% endfor %}
+
+<div class="row more-tags-container">
+  <div class="col-xs-12">
+    <form class="" action="" method="get">
+      <button type="submit" class="btn btn-info btn-sm" name="getLandingTags" value="all">Click here to view all tags</button>
+    </form>
+  </div>
+</div>

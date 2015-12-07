@@ -1,32 +1,19 @@
 <div class="row">
   <div class="col-xs-12">
    
-    <div id="jumbo" class="jumbotron">
-      <h2>Hello, world!</h2>
-      <p>Welcome to proj2_gruppnamns <br> world of Phlogger</p>
-      <p><a class="btn btn-info btn-sm" href="#" role="button">Learn more</a></p>
-    </div>
-    
-    <h4>Browse posts by the most recently added tags: </h4>
+  <div id="jumbo" class="jumbotron">
+    <h2>Hello, world!</h2>
+    <p>Welcome to proj2_gruppnamns <br> world of Phlogger</p>
+    <p><a class="btn btn-info btn-sm" href="#" role="button">Learn more</a></p>
+  </div>
 
-    {% for tag in dataBase.tags %}
-	    <form class="tag-form" action="" method="get">
-    		<input  type="hidden" name="loadview" value="tagresults">
-    		<button type="submit" name="tag" value="{{ tag.id }}" class="tag-btn"> {{ tag.name }} </button>
-	    </form>
-    {% endfor %}
-
-  
-    <div class="row more-tags-container">
-      <div class="col-xs-12">
-        <form class="" role="logout" action="" method="get">
-          <button type="submit" class="btn btn-info btn-sm" name="tags" value="tags">Click here to view all tags</button>
-        </form>
-      </div>
-    </div>
+  {% if dataBase.alltags %}
+	  {% include 'alltags.twig' %}
+  {% else %}
+	  {% include 'limitedtags.twig' %}
+  {% endif %}
 
   <hr>
-
     <h2>Latest blog posts</h2>
       
     <div class="row">

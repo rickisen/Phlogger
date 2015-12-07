@@ -60,6 +60,13 @@ if (isset($_GET['tag'])) {
         $dataBase->getPostsFromTag($_GET['tag']);
 }
 
+if (isset($_GET['getLandingTags'])) {
+        if($_GET['getLandingTags'] == 'all')
+          $dataBase->getAllTags();
+        else 
+          $dataBase->getLimitedTags();
+} else $dataBase->getLimitedTags(); // default
+
 if (isset($_GET['search'])) {
         $dataBase->search($_GET['search']);
 }
@@ -74,7 +81,6 @@ if (isset($_SESSION['user']) && !$_SESSION['user']->isLoggedIn){ $loadview = 'la
 if ($loadview == 'landingpage'){
   $dataBase->getTwelPosts();
   $dataBase->groupPosts();
-  $dataBase->getLandingpageTags();
 }
 
 if (isset($_SESSION['user'])) {
