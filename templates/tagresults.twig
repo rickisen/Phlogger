@@ -5,6 +5,7 @@
 			<h2>Posts related to tag: {{dataBase.activeTag.name}}</h2>
 	 		<p>Amount of posts related to your search: {{ dataBase.posts|length }}</p>
 			
+			<!-- Render tags matching search -->
 			{% for post in dataBase.posts %}
 			<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 				<h4><b>Title: {{ post.title }} </b></h4><br>

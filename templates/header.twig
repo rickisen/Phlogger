@@ -24,13 +24,15 @@
         <button type="submit" class="btn btn-info btn-sm">Submit</button>
       </form>
       
+    <!-- If user is logged in, show username, rank and logout button in header -->  
 	{% if user.isLoggedIn %}
 		<form class="navbar-form navbar-right" role="logout" action="" method="post">
 			<input type="hidden" name="loadview" value="landingpage">
 			<button type="submit" class="btn btn-info btn-sm" name="logout" value="true">Logout</button>
 		</form>
 		<p class="navbar-text navbar-right">Logged in as <a href="index.php?loadview=dash" ><strong> {{ user.username }}</strong></a> <span class="label label-danger">{{ user.rank }}</span></p>
-
+	
+	<!-- If we get unmatched login info, let the user know -->
 	{% elseif user and not user.isLoggedIn %}
 		<form class="navbar-form navbar-right" role="login" action="" method="post">
 			<div class="form-group">
@@ -41,6 +43,8 @@
 			<button type="submit" class="btn btn-info btn-sm">Login</button>
 		</form>
 		<p class="navbar-text navbar-right"><b>Hold your horses</b>, something went terribly wrong here!</p>
+	
+	<!-- Else show standard view -->
 	{% else %}
 	<form class="navbar-form navbar-right" role="login" action="" method="post">
 		<input type="hidden" name="loadview" value="dash">

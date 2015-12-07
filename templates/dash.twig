@@ -4,7 +4,7 @@
 		<h3>Statistics</h3>
 		<div class="container-fluid" id="stats-container">
 			<div class="row">
-				
+				<!-- Render statistics -->
 				<div class="col-xs-4" id="stat-holder">
 					<h5>Total comments</h5><span> {{ dataBase.statistics.count_total_comments }} </span>
 				</div>
@@ -20,6 +20,7 @@
 			</div>
 
 		<div id="popular-posts">
+			<!-- Render top posts -->ß
 			<h5>Your three most popular posts:&nbsp;</h5>
 			<p> 
 				{% for top_post in dataBase.statistics.three_most_commented_posts %}
@@ -28,7 +29,7 @@
 			</p>
 		</div>
 
-		{# Create new post #}
+		<!-- Create new post -->ß
 		<h3>Create new post</h3>
 		<div class="container-fluid" id="form-container">
 			<div class="row">
@@ -47,6 +48,7 @@
 			</div>
 		</div>
 	{% else %}
+		<!-- If someone tries to reach dashboard view without being logged in -->
 		<div class="container-fluid" id="form-container">
 			<div class="row">
 				<div class="col-xs-12">
@@ -56,7 +58,4 @@
 		</div>
 	{% endif %}
 </div>
-
-
-{# Previous posts #}
 

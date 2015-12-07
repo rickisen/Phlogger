@@ -1,5 +1,6 @@
 <h4>Browse posts by all tags: </h4>
 
+<!-- Rendering 30 tags, limitation made in datapuller -->
 {% for tag in dataBase.tags %}
 <form class="tag-form" action="" method="get">
     <input  type="hidden" name="loadview" value="tagresults">
@@ -7,6 +8,7 @@
 </form>
 {% endfor %}
 
+<!-- Render all tags -->
 <div class="row more-tags-container">
   <div class="col-xs-12">
     <form class="" action="" method="get">
