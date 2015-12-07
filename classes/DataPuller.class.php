@@ -134,7 +134,7 @@ class DataPuller{
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
-    $qLTags = 'SELECT * FROM Tag ORDER BY id DESC LIMIT 20';
+    $qLTags = 'SELECT * FROM Tag ORDER BY id DESC LIMIT 30';
 
     // Get all tags
     if( $result = $database->query($qLTags)){
