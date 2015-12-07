@@ -2,7 +2,7 @@
 class Post{
   private $title, $content, $user, $image, $timestamp, $id, $tags, $comments;
 
-  function __construct($title, $content, $image, $user = 0, $id = 0, $timestamp = "", $tags = array(), $comments = array()){
+  function __construct($title, $content, $image, $user = 0, $id = 0, $timestamp = ""){
     $this->title      = $title;
     $this->content    = $content;
     $this->image      = $image;

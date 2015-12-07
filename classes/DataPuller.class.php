@@ -45,7 +45,8 @@ class DataPuller{
     }
 
     $this->posts = array();
-    // Construct the posts
+    // if we got any results from the db, go throught them and 
+    // construct new posts into the posts-array
     if( $result = $database->query($qMonthPosts)){
       while ($row = $result->fetch_assoc()) {
         $this->posts[] = new Post($row['Title'],    $row['Content'], $row['Image'], 
@@ -58,6 +59,7 @@ class DataPuller{
     return TRUE;
   }
 
+  // function that downloads all posts that are has a certain tag 
   function getPostsFromTag($tagID){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -89,6 +91,7 @@ class DataPuller{
     return TRUE;
   }
 
+  // used for getting a single post from the db
   function getSinglePost($postID){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -113,6 +116,7 @@ class DataPuller{
     return TRUE;
   }
 
+  // gets all tags in the db, sometimes used for the landing page
   function getAllTags(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -132,6 +136,7 @@ class DataPuller{
     return TRUE;
   }
 
+  // gets the recently added tags from the db
   function getLimitedTags(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -151,6 +156,7 @@ class DataPuller{
     return TRUE;
   }
 
+  // Gets the twelve latest posts in the db, default for the landing page
   function getTwelPosts(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -177,6 +183,7 @@ class DataPuller{
     return TRUE;
   }
 
+  // function that gets all posts in the db, not used anymore
   function getAllPosts(){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -201,10 +208,13 @@ class DataPuller{
     return TRUE;
   }
 
-  function groupPosts(){
-    // Divide the posts into groups of 12, so that 
+  // function that puts the posts in this->posts 
+  // into a multidmensional array (groupedPosts) 
+  // and groups them 12 by 12 (or whatever number is supplied). 
+  // this is the array currently used on the landing page
+  function groupPosts($limit = 12){
+    // Divide the posts into groups of x, so that 
     // we don't fill the landingpage
-    $limit = 12 ;
     $step = 0 ;
     $group = 0 ;
     foreach ( $this->posts as $post )  {
@@ -215,10 +225,14 @@ class DataPuller{
         ++$group;
         $this->groupedPosts[$group][] = $post;
       }
-    }
+    } 
+    // Maybe not the best way to verify, 
+    // but should allways return true if the grouping worked
     return isset($this->groupedPosts[0][0]);
   }
 
+  // function that gets any post that matches the 
+  // criteria and puts them in this->posts 
   function search($searchFor){
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
@@ -242,6 +256,8 @@ class DataPuller{
       echo 'Something went wrong with the search: '.$database->error ;
       return FALSE;
     }
+    // Remeber the search term we just used, used on the 
+    // searchresults page to show the user what he searched for 
     $this->searchInput = $searchFor;
     return TRUE;
   }

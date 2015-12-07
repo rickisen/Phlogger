@@ -15,7 +15,7 @@ class Tag{
     return $this->$x;
   }
 
-  // connects the tag with a post
+  // connects the tag with a post in the db. 
   function connectTag($parrentID){
     $database = new mysqli('localhost', 'root', '','Phlogger');
     $qConnectThisTagToParrent = 'INSERT INTO p_Has_t (tagID, postID) VALUES ("'.$this->id.'","'.$parrentID.'")' ;
