@@ -8,7 +8,7 @@
     {% endif %}
 
       <div class="caption">
-        <h4>{{ post.title }}</h4>
+        <h4>{{ post.title|title }}</h4>
         <p>{{ post.summary }}</p>
         <p class="commentamount"><b>Comments:</b> {{ post.getComments|length }} </p>
         <p>Posted by: <b>{{post.user}}</b> <br>

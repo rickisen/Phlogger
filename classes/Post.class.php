@@ -75,10 +75,11 @@ class Post{
     $this->id = $database->insert_id;
 
     // connect the tags to our post in the database
-    foreach ($this->tags as $tag){
-      $tag->connectTag($this->id);
+    if (!empty($this->tags)) {
+      foreach ($this->tags as $tag){
+        $tag->connectTag($this->id);
+      }
     }
-
     // lazy error reporting
     if ($response) {
       return TRUE; // it worked!
@@ -116,32 +117,35 @@ class Post{
     // explode the input string into an array 
     // and loop through it and trim surrounding spaces 
     // and escape hostile input
-    $tagNames = explode(',', $tagString);
-    foreach ( $tagNames as $key => $tagName ){
-      $tagNames[$key] = $database->real_escape_string(trim($tagName));
-    } 
+    if (!empty($tagString)) {
+    
+      $tagNames = explode(',', $tagString);
+      foreach ( $tagNames as $key => $tagName ){
+        $tagNames[$key] = $database->real_escape_string(trim($tagName));
+      } 
 
-    // see if we already have a tag in the database with the same name
-    // and if so put that tag into our this->tags array.
-    foreach ( $tagNames as $key => $tagName ){
-      $qTagIdFromName = ' SELECT Tag.* FROM Tag WHERE Tag.Name = "'.$tagName.'"';
+      // see if we already have a tag in the database with the same name
+      // and if so put that tag into our this->tags array.
+      foreach ( $tagNames as $key => $tagName ){
+        $qTagIdFromName = ' SELECT Tag.* FROM Tag WHERE Tag.Name = "'.$tagName.'"';
 
-      if($result = $database->query($qTagIdFromName) ) {
-        if ( $row  = $result->fetch_assoc()) {
-          $this->tags[] = new Tag($row['Name'], $row['id']); 
-        } else { // Otherwise we upload the tag to the db
-          // upload a new tag to db
-          if(!$database->query('INSERT INTO Tag (Name) VALUES("'.$tagName.'")'))
-            echo 'Something went wrong whe trying to upload a tag'.$database->error;
-          
-          // Get the new Tag, (and its newly created id 
-          // which we need to construct a tag)
-          if( $result = $database->query($qTagIdFromName)){
-            if ($row  = $result->fetch_assoc()) {
-              $this->tags[] = new Tag($row['Name'], $row['id']); 
-              } else echo 'new tag not found';
-          } else {
-            echo 'Error when trying to get a newly made tag'.$database->error;
+        if($result = $database->query($qTagIdFromName) ) {
+          if ( $row  = $result->fetch_assoc()) {
+            $this->tags[] = new Tag($row['Name'], $row['id']); 
+          } else { // Otherwise we upload the tag to the db
+            // upload a new tag to db
+            if(!$database->query('INSERT INTO Tag (Name) VALUES("'.$tagName.'")'))
+              echo 'Something went wrong whe trying to upload a tag'.$database->error;
+            
+            // Get the new Tag, (and its newly created id 
+            // which we need to construct a tag)
+            if( $result = $database->query($qTagIdFromName)){
+              if ($row  = $result->fetch_assoc()) {
+                $this->tags[] = new Tag($row['Name'], $row['id']); 
+                } else echo 'new tag not found';
+            } else {
+              echo 'Error when trying to get a newly made tag'.$database->error;
+            }
           }
         }
       }
