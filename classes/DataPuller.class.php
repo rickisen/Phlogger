@@ -1,6 +1,13 @@
 <?php
 class DataPuller{
-  private $groupedPosts, $activeTag, $tags, $posts, $statistics, $searchInput = "", $alltags = FALSE; 
+  private $groupedPosts, $activeTag, $tags, $posts, $statistics;
+  private $alltags = FALSE; 
+  private $searchInput = "";
+
+  function __construct() { 
+    // Create a statistics object
+    $this->statistics = new Statistics();
+  }
 
   function __get($x){
     return $this->$x;
@@ -8,12 +15,7 @@ class DataPuller{
 
   function __isset($x){
     return isset($this->$x);
-  }
-
-  function __construct() { 
-    // Create a statistics object
-    $this->statistics = new Statistics();
-  }
+  }  
 
   // function that returns the posts made this month or x months back in time
   function getMonthsPosts($monthsBack = 0){

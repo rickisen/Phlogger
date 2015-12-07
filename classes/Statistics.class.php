@@ -58,7 +58,7 @@ class Statistics {
                 return $row['total_amount_of_comments']; 
             }
 
-          return "Data retrieval fucked";
+          return "Data retrieval failed"; 
 	}
 
 	function __isset($stats) {

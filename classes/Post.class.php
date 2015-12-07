@@ -11,12 +11,12 @@ class Post{
     $this->timestamp  = $timestamp;
   }
 
-  function __get($name){
-    return $this->$name;
+  function __get($x){
+    return $this->$x;
   }
 
-  function __isset($name) {
-    return isset($this->$name);
+  function __isset($x) {
+    return isset($this->$x);
   }
 
   // goes through all the characters in 
@@ -27,7 +27,7 @@ class Post{
       $ret .= $this->content[$i];  
     }
     
-    // add epilepsy
+    // add dots
     if ( strlen($ret) > 149 )
       $ret .= "...";
 
@@ -67,11 +67,11 @@ class Post{
     $image     = $database->real_escape_string($this->image);
     $user      = $database->real_escape_string($dirtyUser);
 
-    $upQuery = 'INSERT INTO post (Content, Image, Author, Title) 
+    $qInsQuery = 'INSERT INTO post (Content, Image, Author, Title) 
       VALUES (\''.$content.'\', \''.$image.'\',\''.$user.'\', \''.$title.'\' )';
 
     // send the dml query to the db, save the response, and the newly generated id
-    $response = $database->query($upQuery);
+    $response = $database->query($qInsQuery);
     $this->id = $database->insert_id;
 
     // connect the tags to our post in the database

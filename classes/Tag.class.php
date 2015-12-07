@@ -1,6 +1,6 @@
 <?php
 class Tag{
-  private $name, $id ;
+  private $name, $id;
 
   function __construct($name, $id){
     $this->name = $name;
@@ -15,6 +15,7 @@ class Tag{
     return $this->$x;
   }
 
+  // connects the tag with a post
   function connectTag($parrentID){
     $database = new mysqli('localhost', 'root', '','Phlogger');
     $qConnectThisTagToParrent = 'INSERT INTO p_Has_t (tagID, postID) VALUES ("'.$this->id.'","'.$parrentID.'")' ;
