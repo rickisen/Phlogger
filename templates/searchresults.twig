@@ -1,9 +1,9 @@
 <div class="container-fluid">
 	<div class="row">
-{# 		{{ searchInput }}
- #}		<div class="col-sm-12">
+		<div class="col-sm-12">
  		<h2>Search results for: {{ dataBase.searchInput }}</h2>
  		<p>Amount of posts related to your search: {{ dataBase.posts|length }}</p>
+ 			<!-- Render posts related to search -->
 			{% for post in dataBase.posts %}
 				<div id="search-result-summary" style="margin-top: 40px; line-height: 25px;">
 					<h4><b>Title: {{ post.title }} </b><br></h4>

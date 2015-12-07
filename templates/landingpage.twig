@@ -6,7 +6,8 @@
     <p>Welcome to proj2_gruppnamns <br> world of Phlogger</p>
     <p><a href="https://github.com/Carl-the-menace/Phlogger" class="btn btn-info btn-sm" href="#" role="button">Learn more</a></p>
   </div>
-
+ 
+  <!-- Rendering tag views on landing page -->
   {% if dataBase.alltags %}
 	  {% include 'alltags.twig' %}
   {% else %}
@@ -16,17 +17,19 @@
   <hr>
     <h2>Latest blog posts</h2>
       
+    <!-- Render grouped posts using post summary card template -->
     <div class="row">
       {% for post in dataBase.groupedPosts.0 %}
         {% include 'post_summary.twig' %}
       {% endfor %}
     </div>
 
-  <div class="row">
-    <div class="col-xs-12" id="footer-container">
-      {% include "footer.twig" %}
+    <!-- Include footer on landing page -->
+    <div class="row">
+      <div class="col-xs-12" id="footer-container">
+        {% include "footer.twig" %}
+      </div>
     </div>
-  </div>
 
   </div>
 </div>
