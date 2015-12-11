@@ -22,6 +22,11 @@ class DataPuller{
     // Create the connection to our db
     $database = new mysqli('localhost', 'root', '','Phlogger');
 
+    // Cleaned for safty, and if we get anything else than a number
+    // set it to 0, to show the current month
+    $monthsBack = $database->real_escape_string($monthsBack);
+    if (!is_numeric($monthsBack)) $monthsBack = 0 ;
+
     if ($monthsBack < 1){
       $qMonthPosts = ' 
         SELECT post.*, UCASE(user.Username) AS "Username"
